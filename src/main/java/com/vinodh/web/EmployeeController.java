@@ -1,6 +1,5 @@
 package com.vinodh.web;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -31,17 +30,17 @@ public class EmployeeController {
 	}
 
 	@PostMapping(value = "/docs/addEmployee.tsp")
-	public ResponseEntity<?> addEmployee(@Valid @ModelAttribute Employee employee, BindingResult result) {
+	public ResponseEntity<Map<String, String>> addEmployee(@Valid @ModelAttribute Employee employee,
+			BindingResult result) {
 		log.info(employee.toString());
-		Map<String, String> errorMessages = new HashMap<String, String>();
+
 		if (result.hasErrors()) {
-			errorMessages = result.getFieldErrors().stream()
+			Map<String, String> errorMessages = result.getFieldErrors().stream()
 					.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
 			return ResponseEntity.badRequest().body(errorMessages);
 		}
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 
 	}
-
 
 }

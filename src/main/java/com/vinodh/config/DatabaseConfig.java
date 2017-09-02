@@ -39,7 +39,7 @@ public class DatabaseConfig {
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource());
-		sessionFactory.setPackagesToScan(new String[] { "com.vinodh.entity" });
+		sessionFactory.setPackagesToScan("com.vinodh.entity");
 		sessionFactory.setHibernateProperties(hibernateProperties());
 		return sessionFactory;
 	}

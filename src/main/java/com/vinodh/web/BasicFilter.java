@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 public class BasicFilter implements Filter {
 
 	public void destroy() {
-		// TODO Auto-generated method stub
+		// Nothing to implement
 
 	}
 
@@ -23,7 +23,7 @@ public class BasicFilter implements Filter {
 		String requestName = request.getParameter("name");
 		if (!"Vinodh".equalsIgnoreCase(requestName)) {
 			filter.doFilter(request, response);
-		}else{
+		} else {
 			HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 			httpServletResponse.getWriter().write("Vinodh is blocked from accessing the page");
 		}
@@ -31,7 +31,7 @@ public class BasicFilter implements Filter {
 	}
 
 	public void init(FilterConfig arg0) throws ServletException {
-		// TODO Auto-generated method stub
+		// Nothing to implement
 
 	}
 

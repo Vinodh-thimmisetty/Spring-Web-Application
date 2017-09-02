@@ -19,7 +19,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception { 
 		
-		 http.authorizeRequests()  
+		 http.authorizeRequests()  // Http
 	        .antMatchers("/", "/home").permitAll()
 	        .antMatchers("/admin/**").access("hasRole('ADMIN')")
 	        .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
@@ -34,6 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 * Individual Authentication Roles
 	 */
 	@Bean
+	@Override
 	public UserDetailsService userDetailsService() {
 		UserDetailsManager detailsManager = new InMemoryUserDetailsManager();
 		detailsManager.createUser(User.withUsername("vinodh").password("vinodh").roles("USER").build());
@@ -47,4 +48,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.inMemoryAuthentication().withUser("admin").password("root123").roles("ADMIN");
 		auth.inMemoryAuthentication().withUser("dba").password("root123").roles("ADMIN", "DBA");
 	}
+	
+	
 }
