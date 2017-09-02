@@ -31,6 +31,7 @@
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc7</artifactId>
+			<scope>compile</scope>
 			<version>12.1.0</version>
 		</dependency>
 
