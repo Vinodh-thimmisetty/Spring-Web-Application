@@ -6,7 +6,7 @@ addons:
   sonarcloud:
     organization: "vinodh-thimmisetty-github"
     token:
-      secure: "7GWwwUQ1rxBzBHN4rmmM"
+      secure: $SONAR_TOKEN
 
 jdk:
   - oraclejdk8
