@@ -16,19 +16,21 @@ import org.springframework.security.provisioning.UserDetailsManager;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	//@formatter:off
 	@Override
 	protected void configure(HttpSecurity http) throws Exception { 
 		
-		 http.authorizeRequests()  // Http
+		 http.authorizeRequests()
 	        .antMatchers("/", "/home").permitAll()
 	        .antMatchers("/admin/**").access("hasRole('ADMIN')")
 	        .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
 	        .and().formLogin().loginPage("/login")
 	        .usernameParameter("ssoId").passwordParameter("password")
 	        .and().csrf()
+	        .and().logout().logoutUrl("/logout")
 	        .and().exceptionHandling().accessDeniedPage("/Access_Denied");
 	}
-
+	//@formatter:on
 	/**
 	 * 
 	 * Individual Authentication Roles
@@ -48,6 +50,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.inMemoryAuthentication().withUser("admin").password("root123").roles("ADMIN");
 		auth.inMemoryAuthentication().withUser("dba").password("root123").roles("ADMIN", "DBA");
 	}
-	
-	
+
 }

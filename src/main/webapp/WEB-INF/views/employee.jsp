@@ -49,7 +49,7 @@
 			});
 			$("#datepicker").datepicker();
 
-			$("#addEmployee")
+			$("#addEmployeeAjax")
 					.submit(
 							function(e) {
 								e.preventDefault(); // Prevent Default Submission of Form on click of Submit. We need to do something before data is sent to controller
@@ -57,7 +57,7 @@
 								$
 										.ajax(
 												{
-													url : '${pageContext.request.contextPath}/docs/addEmployee.tsp',
+													url : '${pageContext.request.contextPath}/docs/addEmployeeAjax.tsp',
 													type : 'POST',
 													data : formData,
 													dataType : "json",
@@ -72,7 +72,8 @@
 												function(jqXHR) {
 													console.log(jqXHR.status," :: Failed::",jqXHR);
 													$.each(jqXHR.responseJSON,function(key,value){
-														console.log(key,"::",value); 
+														console.log(key,"::",value);
+														$("#empName").show();
 													});
 												});
 							});

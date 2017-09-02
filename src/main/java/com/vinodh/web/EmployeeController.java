@@ -22,15 +22,16 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 public class EmployeeController {
+	private static final String EMPLOYEE_VIEW_NAME = "employee";
 
 	@GetMapping(value = "/docs/loadEmployees.tsp")
 	public String loadEmployee(final ModelMap modelMap) {
 		modelMap.addAttribute("employee", new Employee());
-		return "employee";
+		return EMPLOYEE_VIEW_NAME;
 	}
 
-	@PostMapping(value = "/docs/addEmployee.tsp")
-	public ResponseEntity<Map<String, String>> addEmployee(@Valid @ModelAttribute Employee employee,
+	@PostMapping(value = "/docs/addEmployeeAjax.tsp")
+	public ResponseEntity<Map<String, String>> addEmployeeAjax(@Valid @ModelAttribute Employee employee,
 			BindingResult result) {
 		log.info(employee.toString());
 
@@ -40,6 +41,18 @@ public class EmployeeController {
 			return ResponseEntity.badRequest().body(errorMessages);
 		}
 		return ResponseEntity.status(HttpStatus.CREATED).build();
+
+	}
+
+	@PostMapping(value = "/docs/addEmployee.tsp")
+	public String addEmployee(@Valid @ModelAttribute Employee employee, BindingResult result) {
+		log.info(employee.toString());
+
+		if (result.hasErrors()) {
+			return EMPLOYEE_VIEW_NAME;
+		} else {
+			return "Done";
+		}
 
 	}
 
