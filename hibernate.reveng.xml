@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table-filter match-schema="VINODH" match-name=".*" />
+	<table schema="VINODH" name="EMPLOYEE">
+		<column name="EMP_ID"></column>
+		<column name="EMP_SALARY"></column>
+		<column name="EMP_PHONE"></column>
+		<column name="EMP_DOB"></column>
+		<column name="EMP_NAME"></column>
+		<column name="EMP_EMAIL"></column>
+	</table>
+</hibernate-reverse-engineering>
