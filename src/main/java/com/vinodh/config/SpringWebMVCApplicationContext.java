@@ -20,7 +20,7 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.vinodh")
-public class HelloWorldConfiguration extends WebMvcConfigurerAdapter {
+public class SpringWebMVCApplicationContext extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public ViewResolver viewResolver() {
@@ -30,18 +30,23 @@ public class HelloWorldConfiguration extends WebMvcConfigurerAdapter {
 		viewResolver.setSuffix(".jsp");
 		return viewResolver;
 	}
- 
-	/*   
+
+	/*
 	 * Configure ResourceHandlers to serve static resources like CSS/ Javascript
 	 * etc...
 	 */
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/static/**").addResourceLocations("/static/");
+		registry
+				.addResourceHandler("/resources/**")
+				.addResourceLocations("/resources/");
+		registry
+				.addResourceHandler("/static/**")
+				.addResourceLocations("/static/");
 	}
-	
+
 	@Bean
-	public ResourceBundleMessageSource getMessageSource(){
+	public ResourceBundleMessageSource getMessageSource() {
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
 		messageSource.setBasename("messages");
 		return messageSource;

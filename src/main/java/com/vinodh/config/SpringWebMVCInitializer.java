@@ -11,7 +11,7 @@ public class SpringWebMVCInitializer extends AbstractAnnotationConfigDispatcherS
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class[] { HelloWorldConfiguration.class };
+		return new Class[] { SpringWebMVCApplicationContext.class };
 	}
 
 	@Override

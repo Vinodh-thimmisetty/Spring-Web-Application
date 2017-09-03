@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
@@ -12,23 +13,38 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 
+import com.vinodh.service.CustomUserDetailService;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	//@formatter:off
+	@Autowired
+	private CustomUserDetailService customUserDetailService;
+
+	//@formatter:off 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception { 
 		
-		 http.authorizeRequests()
-	        .antMatchers("/", "/home").permitAll()
-	        .antMatchers("/admin/**").access("hasRole('ADMIN')")
-	        .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
-	        .and().formLogin().loginPage("/login")
-	        .usernameParameter("ssoId").passwordParameter("password")
-	        .and().csrf()
-	        .and().logout().logoutUrl("/logout")
-	        .and().exceptionHandling().accessDeniedPage("/Access_Denied");
+		// Ordering has to be from most specific to Least Specific URL Pattern
+		 http
+		 	.authorizeRequests() 
+		 		.antMatchers("/resources/**").permitAll()
+		 		.antMatchers("/", "/home").permitAll()
+		 		.antMatchers("/admin/**").access("hasRole('ADMIN')")
+		 		.antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
+		 		.antMatchers("/customUser/**","/customUser_CurrentUser/**","/customUser_Secure/**").access("hasRole('USER')")
+		 		.antMatchers("/user/signup").permitAll()
+		 		.antMatchers("/course/list").access("hasRole('USER')")
+	        .and()
+	        	.formLogin().loginPage("/login").permitAll()
+	        	.usernameParameter("ssoId").passwordParameter("password")
+	        .and()
+	        	.csrf() // Enabled By Default of <form:form> is used
+	        .and()
+	        	.logout().logoutUrl("/logout")
+	        .and()
+	        	.exceptionHandling().accessDeniedPage("/Access_Denied");
 	}
 	//@formatter:on
 	/**
@@ -46,9 +62,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
+		// Memory Database
 		auth.inMemoryAuthentication().withUser("bill").password("abc123").roles("USER");
 		auth.inMemoryAuthentication().withUser("admin").password("root123").roles("ADMIN");
 		auth.inMemoryAuthentication().withUser("dba").password("root123").roles("ADMIN", "DBA");
+		// Custom User Database
+		auth.userDetailsService(customUserDetailService);
 	}
 
 }
