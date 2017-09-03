@@ -35,3 +35,12 @@
 			6. Lombok 
 			7. Freemarker templates 
 			8. Datatables 
+			
+## Most of the UI Part is fetched from Different parts of Internet & Changed accordingly			
+	External JS Frameworks/Plugins:
+		1. Bootstrap CSS & JS https://getbootstrap.com/docs/3.3/getting-started/
+		2. Bootstrap Validator https://cdnjs.com/libraries/jquery.bootstrapvalidator
+		2. Block UI http://malsup.com/jquery/block/
+		3. Jquery UI https://jqueryui.com/
+		
+			
