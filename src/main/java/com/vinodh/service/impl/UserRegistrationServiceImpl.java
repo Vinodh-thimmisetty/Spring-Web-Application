@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.vinodh.dao.UserRegistrationDAO;
-import com.vinodh.entity.Country;
 import com.vinodh.service.UserRegistrationService;
 
 @Service
@@ -19,8 +18,13 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	private UserRegistrationDAO userRegistrationDAO;
 
 	@Override
-	public List<Country> loadCountryDetails() {
+	public List<String> loadCountryDetails() {
 		return userRegistrationDAO.loadCountryDetails();
+	}
+
+	@Override
+	public List<String> loadStateDetails(String searchterm) {
+		return userRegistrationDAO.loadStateDetails(searchterm);
 	}
 
 }

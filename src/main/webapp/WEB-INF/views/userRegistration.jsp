@@ -29,6 +29,14 @@
 #success_message {
 	display: none;
 }
+
+.errorMessageStyle {
+	color: #a94442;
+	font-size: 85%;
+	display: block;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
 </style>
 
 <script src="<c:url value="/resources/js/userRegistration.js" />"></script>
@@ -39,13 +47,19 @@
 </head>
 <body>
 	<script type="text/javascript">
+		// On Every Ajax Call
 		$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 	</script>
 	<div class="container">
 
-		<form:form class="well form-horizontal"
+		<!-- Action is submitted using Ajax after CLient Side Validations -->
+		<%-- <form:form class="well form-horizontal"
 			action="${pageContext.request.contextPath}/user/registration"
-			method="post" id="contact_form" commandName="userRegistrationForm">
+			method="post" id="contact_form" commandName="userRegistrationForm"> --%>
+		<!-- UnComment above form tag and Comment below to Manually Validate the Server side bean validation -->
+		<form:form class="well form-horizontal"
+			action="${pageContext.request.contextPath}/user/registration2"
+			method="post" id="contact_form2" commandName="userRegistrationForm">
 			<fieldset>
 
 				<!-- Form Name -->
@@ -68,6 +82,7 @@
 								class="glyphicon glyphicon-user"></i></span> <input name="firstName"
 								placeholder="First Name" class="form-control" type="text">
 						</div>
+						<form:errors path="firstName" cssClass="errorMessageStyle" />
 					</div>
 				</div>
 
@@ -81,6 +96,7 @@
 								class="glyphicon glyphicon-user"></i></span> <input name="lastName"
 								placeholder="Last Name" class="form-control" type="text">
 						</div>
+						<form:errors path="lastName" cssClass="errorMessageStyle"/>
 					</div>
 				</div>
 
@@ -94,8 +110,27 @@
 								class="glyphicon glyphicon-user"></i></span> <input name="userName"
 								placeholder="Username" class="form-control" type="text">
 						</div>
+						<form:errors path="userName" cssClass="errorMessageStyle" />
 					</div>
 				</div>
+
+				<!-- Radio Fields -->
+				<div class="form-group">
+					<label class="col-md-4 control-label">Gender</label>
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<label class="radio-inline"> <input id="genderMale"
+								name="gender" type="radio" value="male"> Male
+							</label> <label class="radio-inline"> <input id="genderFeMale"
+								name="gender" type="radio" value="female"> Female
+							</label> <label class="radio-inline"> <input id="genderTrans"
+								name="gender" type="radio" value="trans"> Trans Gender
+							</label>
+						</div>
+						<form:errors path="gender" cssClass="errorMessageStyle" />
+					</div>
+				</div>
+
 
 				<!-- Text input-->
 
@@ -107,6 +142,7 @@
 								class="glyphicon glyphicon-lock"></i></span> <input name="userPassword"
 								placeholder="Password" class="form-control" type="password">
 						</div>
+						<form:errors path="userPassword" cssClass="errorMessageStyle" />
 					</div>
 				</div>
 
@@ -121,6 +157,8 @@
 								name="userPasswordConfirm" placeholder="Confirm Password"
 								class="form-control" type="password">
 						</div>
+						<form:errors path="userPasswordConfirm"
+							cssClass="errorMessageStyle" />
 					</div>
 				</div>
 
@@ -134,32 +172,38 @@
 								name="userEmail" placeholder="E-Mail Address"
 								class="form-control" type="text">
 						</div>
+						<form:errors path="userEmail" cssClass="errorMessageStyle" />
 					</div>
 				</div>
 				<!-- Country Drop down -->
 				<div class="form-group">
-					<label class="col-md-4 control-label">Department / Office</label>
+					<label class="col-md-4 control-label">Country</label>
 					<div class="col-md-4 selectContainer">
 						<div class="input-group">
 							<span class="input-group-addon"><i
-								class="glyphicon glyphicon-list"></i></span> <select name="department"
+								class="glyphicon glyphicon-globe"></i></span>
+							<form:select path="country" id="listOfCountries"
 								class="form-control selectpicker">
-								<option value="">Select your Country</option>
+								<form:option value="">Select your Country</form:option>
 								<form:options items="${countriesList}" />
-							</select>
+							</form:select>
 						</div>
+						<form:errors path="country" cssClass="errorMessageStyle" />
 					</div>
 				</div>
+
 				<!-- Text input-->
 
 				<div class="form-group">
-					<label class="col-md-4 control-label">Country</label>
+					<label class="col-md-4 control-label">State</label>
 					<div class="col-md-4 inputGroupContainer">
 						<div class="input-group">
 							<span class="input-group-addon"><i
-								class="glyphicon glyphicon-globe"></i></span> <input name="country"
-								placeholder="Country" class="form-control" type="text">
+								class="glyphicon glyphicon-home"></i></span> <input name="state"
+								placeholder="State" id="stateName" class="form-control"
+								type="text">
 						</div>
+						<form:errors path="state" cssClass="errorMessageStyle" />
 					</div>
 				</div>
 
@@ -173,6 +217,7 @@
 								class="glyphicon glyphicon-earphone"></i></span> <input name="phone"
 								placeholder="1234567890" class="form-control" type="text">
 						</div>
+						<form:errors path="phone" cssClass="errorMessageStyle" />
 					</div>
 				</div>
 
@@ -188,8 +233,12 @@
 					<label class="col-md-4 control-label"></label>
 					<div class="col-md-4">
 						<br>
-						<button type="submit" class="btn btn-warning">
+						<button type="submit" id="saveFormData" class="btn btn-success">
 							SUBMIT <span class="glyphicon glyphicon-send"></span>
+						</button>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button" id="resetFormData" class="btn btn-danger">
+							RESET <span class="glyphicon glyphicon-refresh"></span>
 						</button>
 					</div>
 				</div>

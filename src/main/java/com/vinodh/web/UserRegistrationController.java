@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vinodh.dto.UserRegistrationForm;
 import com.vinodh.service.UserRegistrationService;
@@ -43,6 +45,11 @@ public class UserRegistrationController {
 		model.addAttribute("countriesList", userRegistrationService.loadCountryDetails());
 		model.addAttribute("userRegistrationForm", new UserRegistrationForm());
 		return "userRegistration";
+	}
+
+	@GetMapping("/autoSuggestIndianStates")
+	public @ResponseBody List<String> loadIndiaStates(@RequestParam("term") String searchterm) {
+		return userRegistrationService.loadStateDetails(searchterm);
 	}
 
 	/**
@@ -85,7 +92,7 @@ public class UserRegistrationController {
 		if (bindingResult.hasErrors()) {
 			return "userRegistration";
 		} else {
-			return "redirect: /course/courseList";
+			return "redirect:/course/courseList";
 
 		}
 	}
