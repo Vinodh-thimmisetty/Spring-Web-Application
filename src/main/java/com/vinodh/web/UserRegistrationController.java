@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.vinodh.dto.UserRegistrationForm;
+import com.vinodh.service.UserRegistrationService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,6 +27,9 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/user")
 @Slf4j
 public class UserRegistrationController {
+
+	@Autowired
+	private UserRegistrationService userRegistrationService;
 
 	/**
 	 * 
@@ -34,6 +39,8 @@ public class UserRegistrationController {
 	 */
 	@GetMapping("/signup")
 	public String loadRegistration(Model model) {
+		// Load Any Predefined values from the Database. Like countries Dropdown etc.
+		model.addAttribute("countriesList", userRegistrationService.loadCountryDetails());
 		model.addAttribute("userRegistrationForm", new UserRegistrationForm());
 		return "userRegistration";
 	}

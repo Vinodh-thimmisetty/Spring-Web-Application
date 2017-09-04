@@ -136,7 +136,20 @@
 						</div>
 					</div>
 				</div>
-
+				<!-- Country Drop down -->
+				<div class="form-group">
+					<label class="col-md-4 control-label">Department / Office</label>
+					<div class="col-md-4 selectContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-list"></i></span> <select name="department"
+								class="form-control selectpicker">
+								<option value="">Select your Country</option>
+								<form:options items="${countriesList}" />
+							</select>
+						</div>
+					</div>
+				</div>
 				<!-- Text input-->
 
 				<div class="form-group">
