@@ -202,7 +202,7 @@ $(document).ready(function() {
 		$('#contact_form2').data('bootstrapValidator').resetForm();
 	})
 	 
-	$('#contact_forms2').bootstrapValidator({
+	$('#contact_form2').bootstrapValidator({
 	// To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
 	feedbackIcons : {
 		valid : 'glyphicon glyphicon-ok',
