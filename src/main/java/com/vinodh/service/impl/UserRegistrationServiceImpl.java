@@ -37,8 +37,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 		Mapper mapper = new DozerBeanMapper();
 		ApplicationUser applicationUser = mapper.map(registrationForm, ApplicationUser.class);
 		userRegistrationDAO.saveUserDetails(applicationUser);
-		
-		
+
 	}
 
 }

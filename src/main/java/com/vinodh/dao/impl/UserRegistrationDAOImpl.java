@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +49,22 @@ public class UserRegistrationDAOImpl implements UserRegistrationDAO {
 	public void saveUserDetails(ApplicationUser applicationUser) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		currentSession.save(applicationUser);
+	}
+
+	@Override
+	public boolean isValidEmail(String userEmail) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query query = currentSession.createNamedQuery("email.exists").setParameter("userEmail", userEmail);
+		return query.getResultList().isEmpty();
+
+	}
+
+	@Override
+	public boolean isValidUserName(String userName) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query query = currentSession.createNamedQuery("username.exists").setParameter("userName", userName);
+		return query.getResultList().isEmpty();
+
 	}
 
 }

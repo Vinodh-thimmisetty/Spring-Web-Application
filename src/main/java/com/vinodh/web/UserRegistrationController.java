@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.vinodh.custom.exceptions.EmailExistException;
+import com.vinodh.custom.exceptions.UserNameExistException;
 import com.vinodh.dto.UserRegistrationForm;
 import com.vinodh.service.UserRegistrationService;
 
@@ -85,6 +87,8 @@ public class UserRegistrationController {
 	 * @param registrationForm
 	 * @param bindingResult
 	 * @return
+	 * @throws EmailExistException
+	 * @throws UserNameExistException
 	 */
 	@PostMapping(value = "/registration2")
 	public String handleRegistration2(@Valid @ModelAttribute UserRegistrationForm registrationForm,

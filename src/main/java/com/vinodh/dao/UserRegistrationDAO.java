@@ -9,5 +9,9 @@ public interface UserRegistrationDAO {
 
 	List<String> loadStateDetails(String searchterm);
 
-	void saveUserDetails(ApplicationUser applicationUser);
+	void saveUserDetails(ApplicationUser applicationUser); 
+
+	boolean isValidEmail(String userEmail);
+
+	boolean isValidUserName(String userName);
 }

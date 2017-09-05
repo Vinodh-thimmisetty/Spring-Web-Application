@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.NamedQuery;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,6 +19,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(schema = "VINODH", name = "USER_INFORMATION")
+@NamedQuery(name = "email.exists", query = "from ApplicationUser a where UPPER(TRIM(a.userEmail)) = UPPER(TRIM(:userEmail))")
+@NamedQuery(name = "username.exists", query = "from ApplicationUser a where UPPER(TRIM(a.userName)) = UPPER(TRIM(:userName))")
 public class ApplicationUser implements Serializable {
 
 	private static final long serialVersionUID = 1706865056988491882L;

@@ -1,18 +1,24 @@
 package com.vinodh.dto;
 
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.vinodh.util.custom.annotations.IsEmailExists;
+import com.vinodh.util.custom.annotations.IsUserNameExists;
+import com.vinodh.util.custom.annotations.PasswordMatches;
+import com.vinodh.util.custom.annotations.ValidEmail;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@PasswordMatches
 public class UserRegistrationForm {
 
 	@NotEmpty(message = "Please enter your Username")
 	@Length(min = 8, message = "Min Allowed Length is {2}")
+	@IsUserNameExists
 	private String userName;
 	@NotEmpty(message = "Please enter your Password")
 	@Length(min = 8, message = "Min Allowed Length is {2}")
@@ -22,7 +28,8 @@ public class UserRegistrationForm {
 	private String userPasswordConfirm;
 	@NotEmpty(message = "Please enter your Email Address")
 	@Length(min = 8, message = "Min Allowed Length is {2}")
-	@Email(message = "Please enter a valid Email Address")
+	@ValidEmail
+	@IsEmailExists
 	private String userEmail;
 	@NotEmpty(message = "Please enter your First Name")
 	@Length(min = 2, message = "Min Allowed Length is {2}")
