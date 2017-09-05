@@ -13,7 +13,9 @@ import com.vinodh.util.custom.annotations.IsUserNameExists;
 import com.vinodh.util.custom.annotations.PasswordMatches;
 import com.vinodh.util.custom.annotations.ValidEmail;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -60,9 +62,14 @@ public class UserRegistrationForm {
 
 	// Generate a secure Random Number to hold the verification token
 	// In case of any Exception, default random number is assigned
-	private String emailValidationToken = this.userEmail
-			+ StringUtils.defaultIfBlank(String.valueOf(generateSecureRandomNumber()), DEFAULT_SECURE_RANDOM_NUMBER)
-			+ this.userName;
+	@Getter(AccessLevel.NONE)
+	private String emailValidationToken;
+
+	public String getEmailValidationToken() {
+		return StringUtils.defaultIfBlank(String.valueOf(generateSecureRandomNumber()), DEFAULT_SECURE_RANDOM_NUMBER)
+				+ getUserName();
+
+	}
 
 	private Date tokenCreatedTime = new Date();
 

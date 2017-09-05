@@ -50,7 +50,7 @@ public class ApplicationUser implements Serializable {
 	private String phone;
 	@Column(name = "USER_GENDER")
 	private String gender;
-	@Column(name = "EMAIL_VALIDATION_KEY")
+ 	@Column(name = "EMAIL_VALIDATION_KEY")
 	private String emailValidationToken;
 	@Column(name = "TOKEN_GENERATED_TIME")
 	@Temporal(TemporalType.DATE)
