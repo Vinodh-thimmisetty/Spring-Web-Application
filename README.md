@@ -43,4 +43,6 @@
 		2. Block UI http://malsup.com/jquery/block/
 		3. Jquery UI https://jqueryui.com/
 		
-			
+
+## Helpful Github Repos used
+ 	1. Dozer for Object Mappings: https://github.com/DozerMapper/dozer/
