@@ -92,6 +92,8 @@ public class UserRegistrationController {
 		if (bindingResult.hasErrors()) {
 			return "userRegistration";
 		} else {
+			// Save the Form Data into Database
+			userRegistrationService.saveUserDetails(registrationForm);
 			return "redirect:/course/courseList";
 
 		}

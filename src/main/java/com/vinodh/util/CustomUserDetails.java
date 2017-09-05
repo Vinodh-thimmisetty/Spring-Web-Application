@@ -19,7 +19,7 @@ public class CustomUserDetails extends ApplicationUser implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return getEmail();
+		return getUserEmail();
 	}
 
 	@Override
@@ -40,6 +40,11 @@ public class CustomUserDetails extends ApplicationUser implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	@Override
+	public String getPassword() {
+		return getPassword();
 	}
 
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.vinodh.dao.UserRegistrationDAO;
+import com.vinodh.entity.ApplicationUser;
 
 //@formatter:off
 /**
@@ -43,6 +44,12 @@ public class UserRegistrationDAOImpl implements UserRegistrationDAO {
 		Query query = currentSession.createNamedQuery("states.loadAll").setParameter("searchterm",
 				"%" + searchterm + "%");
 		return query.getResultList();
+	}
+
+	@Override
+	public void saveUserDetails(ApplicationUser applicationUser) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		currentSession.save(applicationUser);
 	}
 
 }

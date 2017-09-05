@@ -93,7 +93,7 @@ public class LoginController {
 		Authentication authentication = context.getAuthentication();
 		UserDetails principal = (UserDetails) authentication.getPrincipal();
 		ApplicationUser user = new ApplicationUser();
-		user.setEmail(principal.getUsername());
+		user.setUserEmail(principal.getUsername());
 		user.setFirstName("Vinodh Kumar Thimmisetty");
 		return user;
 	}

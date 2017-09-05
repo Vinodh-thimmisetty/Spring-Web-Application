@@ -188,7 +188,7 @@ $(document).ready(function() {
     
 	// Auto Suggest the State Names if INDIA is selected in Country dropdown
 	$("#listOfCountries").change(function() {
-	    if($(this).find("option:selected").text() == "INDIA"){
+	    if($(this).find("option:selected").text().toUpperCase() == "INDIA"){
 
 	  	  $( "#stateName" ).autocomplete({
 	  	      source: "/Spring-Security/user/autoSuggestIndianStates"
