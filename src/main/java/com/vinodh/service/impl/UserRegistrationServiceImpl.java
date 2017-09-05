@@ -21,6 +21,9 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	@Autowired
 	private UserRegistrationDAO userRegistrationDAO;
 
+	@Autowired
+	private EmailService emailService;
+
 	@Override
 	public List<String> loadCountryDetails() {
 		return userRegistrationDAO.loadCountryDetails();
@@ -36,8 +39,10 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 		// Convert the form Object(DTO) to Entity
 		Mapper mapper = new DozerBeanMapper();
 		ApplicationUser applicationUser = mapper.map(registrationForm, ApplicationUser.class);
+		// Save the Entity
 		userRegistrationDAO.saveUserDetails(applicationUser);
-
+		// Send Registration Confirmation Link to User
+		emailService.sendRegistrationVerificatoinEmail();
 	}
 
 }

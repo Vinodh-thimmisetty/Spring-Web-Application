@@ -96,10 +96,13 @@ public class UserRegistrationController {
 		if (bindingResult.hasErrors()) {
 			return "userRegistration";
 		} else {
-			// Save the Form Data into Database
+			// Save the Form Data into Database along with Generated Validation key
+			// Send Registration Confirmation Link to User
 			userRegistrationService.saveUserDetails(registrationForm);
+ 			
 			return "redirect:/course/courseList";
 
 		}
 	}
+
 }

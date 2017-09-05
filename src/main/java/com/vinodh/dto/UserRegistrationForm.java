@@ -1,5 +1,10 @@
 package com.vinodh.dto;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Date;
+
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -10,11 +15,15 @@ import com.vinodh.util.custom.annotations.ValidEmail;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Data
 @NoArgsConstructor
 @PasswordMatches
+@Slf4j
 public class UserRegistrationForm {
+
+	private static final String DEFAULT_SECURE_RANDOM_NUMBER = "192837433vinodh4165392087";
 
 	@NotEmpty(message = "Please enter your Username")
 	@Length(min = 8, message = "Min Allowed Length is {2}")
@@ -48,4 +57,22 @@ public class UserRegistrationForm {
 	private String phone;
 	@NotEmpty(message = "Please enter your Gender")
 	private String gender;
+
+	// Generate a secure Random Number to hold the verification token
+	// In case of any Exception, default random number is assigned
+	private String emailValidationToken = this.userEmail
+			+ StringUtils.defaultIfBlank(String.valueOf(generateSecureRandomNumber()), DEFAULT_SECURE_RANDOM_NUMBER)
+			+ this.userName;
+
+	private Date tokenCreatedTime = new Date();
+
+	private Long generateSecureRandomNumber() {
+		try {
+			SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
+			return secureRandom.nextLong();
+		} catch (NoSuchAlgorithmException e) {
+			log.error("Exception occurred while generation Algorithm ", e);
+		}
+		return null;
+	}
 }

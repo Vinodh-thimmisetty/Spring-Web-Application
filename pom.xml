@@ -42,6 +42,26 @@
 	</properties>
 
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.20</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.3.10.RELEASE</version>
+		</dependency>
+
+
 		<!-- Bean Copy -->
 		<dependency>
 			<groupId>com.github.dozermapper</groupId>
@@ -72,8 +92,8 @@
 			<artifactId>ojdbc7</artifactId>
 			<scope>compile</scope>
 			<version>12.1.0</version>
-		</dependency> -->
-
+		</dependency>
+ -->
 		<!-- jsr303 validation -->
 		<dependency>
 			<groupId>javax.validation</groupId>
