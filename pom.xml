@@ -89,7 +89,7 @@
 		</dependency>
 		<!-- <dependency>
 			<groupId>com.oracle</groupId>
-			<artifactId>`7</artifactId>
+			<artifactId>ojdbc7</artifactId>
 			<scope>compile</scope>
 			<version>12.1.0</version>
 		</dependency> -->
@@ -191,6 +191,21 @@
 					<warSourceDirectory>src/main/webapp</warSourceDirectory>
 					<warName>Spring-Security</warName>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.0.1</version>
+				<configuration>
+					<configLocation>http://nexus.itg.ti.com/nexus/service/local/repositories/releases/content/com/ti/sfw/tools/checkstyle/ti_checks/ti_checks-1.10.xml</configLocation>
+					<dependencies>
+						<dependency>
+							<groupId>com.puppycrawl.tools</groupId>
+							<artifactId>checkstyle</artifactId>
+							<version>7.6</version>
+						</dependency>
+					</dependencies>
 				</configuration>
 			</plugin>
 		</plugins>
