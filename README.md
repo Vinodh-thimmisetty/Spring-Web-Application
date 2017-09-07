@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Vinodh-thimmisetty/Spring-Web-Application.svg?branch=JSR303-Sample)](https://travis-ci.org/Vinodh-thimmisetty/Spring-Web-Application)
+
 # Spring-Web-Application : Course Registration System 
 
 		Common Requirements: 
