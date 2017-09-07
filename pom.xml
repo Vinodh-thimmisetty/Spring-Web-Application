@@ -42,6 +42,10 @@
 	</properties>
 
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+		<!-- <dependency> <groupId>org.mockito</groupId> <artifactId>mockito-all</artifactId> 
+			<version>1.9.5</version> <scope>test</scope> </dependency> -->
+
 		<!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
 		<dependency>
 			<groupId>org.freemarker</groupId>
@@ -86,8 +90,8 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate.version}</version>
-		</dependency>
-		<!-- <dependency>
+		</dependency><!-- 
+		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc7</artifactId>
 			<scope>compile</scope>
@@ -167,8 +171,12 @@
 
 
 		<!-- Testing -->
-		<!-- <dependency> <groupId>junit</groupId> <artifactId>junit</artifactId> 
-			<version>3.8.1</version> <scope>test</scope> </dependency> -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -207,6 +215,30 @@
 						</dependency>
 					</dependencies>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.9</version>
+				<configuration>
+					<destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
+					<dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
+				</configuration>
+				<executions>
+					<execution>
+						<id>jacoco-initialize</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>jacoco-site</id>
+						<phase>package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

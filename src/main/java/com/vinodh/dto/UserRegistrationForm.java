@@ -14,6 +14,8 @@ import com.vinodh.util.custom.annotations.PasswordMatches;
 import com.vinodh.util.custom.annotations.ValidEmail;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,15 +23,17 @@ import lombok.extern.slf4j.Slf4j;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @PasswordMatches
 @Slf4j
+@Builder
 public class UserRegistrationForm {
 
 	private static final String DEFAULT_SECURE_RANDOM_NUMBER = "192837433vinodh4165392087";
 
 	@NotEmpty(message = "Please enter your Username")
 	@Length(min = 8, message = "Min Allowed Length is {2}")
-	@IsUserNameExists
+	//@IsUserNameExists
 	private String userName;
 	@NotEmpty(message = "Please enter your Password")
 	@Length(min = 8, message = "Min Allowed Length is {2}")
@@ -40,7 +44,7 @@ public class UserRegistrationForm {
 	@NotEmpty(message = "Please enter your Email Address")
 	@Length(min = 8, message = "Min Allowed Length is {2}")
 	@ValidEmail
-	@IsEmailExists
+	//@IsEmailExists
 	private String userEmail;
 	@NotEmpty(message = "Please enter your First Name")
 	@Length(min = 2, message = "Min Allowed Length is {2}")

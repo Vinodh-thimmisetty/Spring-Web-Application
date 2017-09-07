@@ -20,13 +20,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.vinodh.custom.exceptions.EmailExistException;
-import com.vinodh.custom.exceptions.UserNameExistException;
 import com.vinodh.dto.UserRegistrationForm;
 import com.vinodh.service.UserRegistrationService;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 
+ * //@formatter:off
+ * 		1. Try to use annotation as much as possible.Make sure "commandname" in the
+ * 			<form:form> is same as model attribute name.
+ * 		2. Treat All Fields of Form backing object(DTO) as STRING.
+ * 		3. Use of String Trim Editor to avoid saving the trailing spaces.
+ * 		4. Before Submitting the Form details to Server, client side validations are must.
+ * 		 5. JSR 303 server side error messages will reflect only with spring form tags.
+ * 		 6. Never have a "VOID" return type for any method in Controller.
+ * 		 7. Try using Utility methods from commonslang, google guava instead of lengthy code.
+ * 		 8. Use single Logging framework across entire Web Application.
+ * 		 9. Don't hit the jsp page directly, try to send as ModelAndView.
+ * 
+ * //@formatter:on  
+ * 
+ * @Controller This is entry point for User Registration. Lombok is used for
+ *             Logging(SLF4J).
+ * 
+ * @GetMapping will load the registration home page. All country related
+ *             information will be send to dropdown.
+ * 
+ * 
+ * @PostMapping will used to handle the Form data sent as JSON from the Ajax
+ *              Request (OR) to handle directly by form submission.
+ * 
+ * 
+ * @author Vinodh Kumar Thimmisetty
+ *
+ */
 @Controller
 @RequestMapping("/user")
 @Slf4j
@@ -36,7 +64,7 @@ public class UserRegistrationController {
 	private UserRegistrationService userRegistrationService;
 
 	/**
-	 * 
+	 * Registration Home page
 	 * 
 	 * @param model
 	 * @return
@@ -49,13 +77,23 @@ public class UserRegistrationController {
 		return "userRegistration";
 	}
 
+	/**
+	 * Based on Selection of Country, LIst of State Names will be loaded from the
+	 * Database
+	 * 
+	 * @param searchterm
+	 * @return
+	 */
 	@GetMapping("/autoSuggestIndianStates")
 	public @ResponseBody List<String> loadIndiaStates(@RequestParam("term") String searchterm) {
 		return userRegistrationService.loadStateDetails(searchterm);
 	}
 
 	/**
+	 * This method is used to handle the Form data as JSON. All Error Messages are
+	 * grouped as a response entity or List or Map and send back to client.
 	 * 
+	 * This type of response doesn't help in displaying the errors at View.
 	 * 
 	 * @param registrationForm
 	 * @param bindingResult
@@ -83,12 +121,16 @@ public class UserRegistrationController {
 
 	/**
 	 * 
+	 * This is the best way to handle form data. All Form data will be mapped
+	 * to @Valid annotated Model object, where JSR 303 validaton errors are
+	 * captured(if any) and using BindingResult, all server side errors will be send
+	 * back to view.
+	 * 
+	 * In view , all errors will map based on <form:errors path="##">
 	 * 
 	 * @param registrationForm
 	 * @param bindingResult
 	 * @return
-	 * @throws EmailExistException
-	 * @throws UserNameExistException
 	 */
 	@PostMapping(value = "/registration2")
 	public String handleRegistration2(@Valid @ModelAttribute UserRegistrationForm registrationForm,
@@ -99,7 +141,7 @@ public class UserRegistrationController {
 			// Save the Form Data into Database along with Generated Validation key
 			// Send Registration Confirmation Link to User
 			userRegistrationService.saveUserDetails(registrationForm);
- 			
+
 			return "redirect:/course/courseList";
 
 		}
