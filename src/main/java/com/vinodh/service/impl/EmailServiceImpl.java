@@ -18,6 +18,7 @@ import com.vinodh.service.EmailService;
 
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 
@@ -29,6 +30,7 @@ import freemarker.template.TemplateException;
  *
  */
 @Service
+@Slf4j
 public class EmailServiceImpl implements EmailService {
 
 	@Autowired
@@ -64,7 +66,7 @@ public class EmailServiceImpl implements EmailService {
 			content.append(
 					FreeMarkerTemplateUtils.processTemplateIntoString(configuration.getTemplate(templateName), model));
 		} catch (IOException | TemplateException e) {
-			e.printStackTrace();
+			log.error("Exception occured while loading the Freemarker Template {}", templateName);
 		}
 		return content.toString();
 	}
