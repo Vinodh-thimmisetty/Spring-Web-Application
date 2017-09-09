@@ -25,8 +25,8 @@ import org.springframework.web.servlet.view.JstlView;
  * 
  */
 @Configuration
+@ComponentScan(basePackages = "com.vinodh.web")
 @EnableWebMvc
-@ComponentScan(basePackages = "com.vinodh")
 public class SpringWebMVCApplicationContext extends WebMvcConfigurerAdapter {
 
 	@Bean
@@ -70,7 +70,7 @@ public class SpringWebMVCApplicationContext extends WebMvcConfigurerAdapter {
 		return changeInterceptor;
 
 	}
-	
+
 	@Bean
 	public Validator validator() {
 		return new LocalValidatorFactoryBean();

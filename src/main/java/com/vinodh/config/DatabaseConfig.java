@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -17,15 +17,15 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
+@ComponentScan(basePackages = { "com.vinodh" }, excludeFilters = {
+		@ComponentScan.Filter(type = FilterType.REGEX, pattern = "com.vinodh.web.*") })
 @EnableTransactionManagement
-@ComponentScan("com.vinodh.config")
-@PropertySource(value = { "classpath:application.properties" })
 public class DatabaseConfig {
 
 	@Autowired
 	Environment environment;
 
-	@Bean
+	@Bean("oracleDatabase")
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName"));

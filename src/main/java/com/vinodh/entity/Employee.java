@@ -27,19 +27,19 @@ public class Employee implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@Column(name = "EMP_ID", unique = true, nullable = false)
+	@Column(name = "EMP_ID")
 	@GeneratedValue
 	private Integer empId;
-	@Column(name = "EMP_NAME", nullable = false, length = 111)
+	@Column(name = "EMP_NAME")
 	private String empName;
-	@Column(name = "EMP_PHONE", nullable = false, precision = 22, scale = 0)
+	@Column(name = "EMP_PHONE")
 	private Integer empPhone;
-	@Column(name = "EMP_SALARY", nullable = false, precision = 22, scale = 0)
+	@Column(name = "EMP_SALARY")
 	private Integer empSalary;
 	@Temporal(TemporalType.DATE)
-	@Column(name = "EMP_DOB", nullable = false, length = 7)
+	@Column(name = "EMP_DOB")
 	private Date empDob;
-	@Column(name = "EMP_EMAIL", nullable = false, length = 64)
+	@Column(name = "EMP_EMAIL")
 	private String empEmail;
 
 }

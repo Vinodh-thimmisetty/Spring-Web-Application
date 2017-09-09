@@ -3,6 +3,7 @@ package com.vinodh.dao.impl;
 import java.util.List;
 
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -23,6 +24,7 @@ import com.vinodh.entity.ApplicationUser;
  */
 // @formatter:on
 @Repository
+@Transactional
 public class UserRegistrationDAOImpl implements UserRegistrationDAO {
 
 	@Autowired

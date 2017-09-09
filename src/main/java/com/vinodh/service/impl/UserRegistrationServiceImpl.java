@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.transaction.Transactional;
-import javax.validation.Validator;
 
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
@@ -27,9 +26,6 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
 	@Autowired
 	private EmailService emailService;
-
-	@Autowired
-	private Validator validator;
 
 	@Override
 	public List<String> loadCountryDetails() {

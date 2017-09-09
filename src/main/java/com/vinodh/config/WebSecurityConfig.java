@@ -12,15 +12,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 
-import com.vinodh.service.CustomUserDetailService;
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	private CustomUserDetailService customUserDetailService;
-
+	 
 	//@formatter:off 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception { 
@@ -64,8 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.inMemoryAuthentication().withUser("bill").password("abc123").roles("USER");
 		auth.inMemoryAuthentication().withUser("admin").password("root123").roles("ADMIN");
 		auth.inMemoryAuthentication().withUser("dba").password("root123").roles("ADMIN", "DBA");
-		// Custom User Database
-		auth.userDetailsService(customUserDetailService);
+		// Custom User Database 
 	}
 
 }

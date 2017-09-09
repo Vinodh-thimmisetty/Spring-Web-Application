@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/course")
 public class CourseListController {
-	private static final String LIST_COURSES_VIEWNAME = "courseList";
+	private static final String LIST_COURSES_VIEWNAME = "coursesList";
 
 	@GetMapping("/courseList")
 	public String loadRegistration() {
