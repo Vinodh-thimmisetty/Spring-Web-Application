@@ -6,13 +6,14 @@ import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 public class JavaMail {
 
-	public static void main(String[] args) throws AddressException, MessagingException {
+	public static void main(String[] args) throws MessagingException {
 
 		// Get properties object
 		Properties props = new Properties();
@@ -23,6 +24,7 @@ public class JavaMail {
 		props.put("mail.smtp.port", "465");
 
 		javax.mail.Session session = Session.getInstance(props, new Authenticator() {
+			@Override
 			protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
 				return new javax.mail.PasswordAuthentication("##@gmail.com", "###");
 			}
@@ -36,6 +38,6 @@ public class JavaMail {
 		message.setContent("<a href='https://www.google.com' > Jaffa </a>", "text/html");
 		javax.mail.Transport.send(message);
 
-		System.out.println("Message sent successfully");
+		log.info("Message sent successfully");
 	}
 }
