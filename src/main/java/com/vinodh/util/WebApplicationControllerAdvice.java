@@ -3,6 +3,7 @@ package com.vinodh.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONException;
@@ -41,6 +42,11 @@ public class WebApplicationControllerAdvice {
 	@ExceptionHandler(JSONException.class)
 	public void logJsonException(HttpServletRequest httpServletRequest, Exception exception) {
 		log.error("Json Exceptin is {}", exception.getMessage());
+	}
+
+	@ExceptionHandler(MessagingException.class)
+	public void logMessagingException(HttpServletRequest httpServletRequest, Exception exception) {
+		log.error("MessagingException {}", exception.getMessage());
 	}
 
 }

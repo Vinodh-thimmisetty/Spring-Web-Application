@@ -1,4 +1,4 @@
-package com.vinodh.config.test;
+package com.vinodh.web.test;
 
 import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.containsString;
@@ -76,8 +76,6 @@ public class UserRegistrationControllerTest {
 	private static final String INVALID_USERNAME = "invalid";
 
 	private static final String SUCCESS = "SUCCESS";
-	private static final String FAILURE = "FAILURE";
-	private static final String REDIRECTED = "REDIRECTED";
 	private static final String VALIDATION_ERRORS = "VALIDATION_ERRORS";
 	private final static String STATUS = "STATUS";
 
@@ -163,11 +161,12 @@ public class UserRegistrationControllerTest {
 			   .andExpect(model().attribute("userRegistrationForm", any(UserRegistrationForm.class)))
 			   .andExpect(model().attribute("countriesList", sampleList));
 	 	
+ 	 	log.info("Signing up Action test cases are passed");
 	 	mockMvc.perform(get("/user/autoSuggestIndianStates").param("term", "India"))
 	 		   .andExpect(status().isOk())
 	 		   .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 	 		   .andExpect(content().string(sampleJson));
-	 	
+	 	log.info("autoSuggestIndianStates Action test cases are passed");
 	 	
 	 	// Validations will be done before action hits the controller 
 	 	// Mocking Custom Constraint Validation
@@ -188,8 +187,9 @@ public class UserRegistrationControllerTest {
 									.param("gender","Male")
 									.param("phone","1234567890"))
 					 			.andExpect(status().is3xxRedirection());
-				 	
-					 	mockMvc.perform(post("/user/registration2") 
+			 log.info("registration2/ with all Valid form fields test cases are completed");	
+			
+			 			mockMvc.perform(post("/user/registration2") 
 									.param("userPassword","vinodh1234")
 									.param("userPasswordConfirm","vinodh1234")
 									.param("userName",INVALID_USERNAME)
@@ -200,10 +200,10 @@ public class UserRegistrationControllerTest {
 									.param("phone","1234567890"))
 						 			.andExpect(status().isOk())
 					 			.andExpect(view().name("userRegistration"));
-					 	
+			log.info("registration2/ with InValid form fields test cases are completed");
+			
 				String jsonResponse = "\"[{\\\"Redirect\\\":\\\"/course/courseList\\\"}]\"";
-				
-					   mockMvc.perform(post("/user/registration")
+				 	   mockMvc.perform(post("/user/registration")
 				 					.param("firstName", "Vinodh") 
 				 					.param("lastName","Thimmisetty")
 				 					.param("userName",VALID_USERNAME)
@@ -217,7 +217,8 @@ public class UserRegistrationControllerTest {
 					  		 .andExpect(status().is2xxSuccessful())
 					  		 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 					  		 .andExpect(content().string(jsonResponse));
-	  
+		log.info("registration/ with all Valid form fields test cases are passed");
+		
 					   mockMvc.perform(post("/user/registration") 
 							   		.param("firstName", "Vinodh") 
 							   		.param("lastName","Thimmisetty") 
@@ -235,7 +236,10 @@ public class UserRegistrationControllerTest {
 							.andExpect(content().string(containsString("Username Already Exists")))
 							.andExpect(content().string(containsString("Invalid email")))
 							.andExpect(content().string(containsString("Min Allowed Length is 8")));
-					   		 	
+					   
+			log.info("registration/ with InValid form fields test cases are completed");
+						
+						
 	  responseEntity =jsonMapper.readValue(
 			  			mockMvc.perform(post("/user/registrationEndpoint")
 				 					.param("firstName", "Vinodh") 
@@ -251,7 +255,8 @@ public class UserRegistrationControllerTest {
 					  		 .andExpect(status().is2xxSuccessful())
 					  		 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 					  		 .andReturn().getResponse().getContentAsString(), new TypeReference<Map<String,Object>>(){});
-	 
+	  log.info("registrationEndpoint/ with all Valid form fields test cases are passed");
+		
 	  assertThat(responseEntity.get(STATUS), is(equalTo(SUCCESS)));	 	
 	  
 	  
@@ -268,7 +273,8 @@ public class UserRegistrationControllerTest {
 							.andExpect(status().isOk())
 							.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 							.andReturn().getResponse().getContentAsString(), new TypeReference<Map<String,Object>>(){}); 
-						
+	 log.info("registrationEndpoint/ with InValid form fields test cases are completed");
+				
 		assertThat(responseEntity.get(STATUS), is(equalTo(VALIDATION_ERRORS)));	 
 		 		 	
 	 	

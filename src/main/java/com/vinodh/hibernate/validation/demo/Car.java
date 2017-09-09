@@ -83,8 +83,11 @@ public class Car {
 	}
 
 	// Container Level constraints. Can be used for Custom Constraint
+	@Builder.Default
 	private Set<@NotNull @Size(min = 2, max = 10) String> emails = Collections.emptySet();
+	@Builder.Default
 	private List<@NotNull @Size(min = 2, max = 10) String> description = Collections.emptyList();
+	@Builder.Default
 	private Map<@Length(min = 2) String, @Length(max = 5) String> marks = Collections.emptyMap();
 
 	// Built in Bean Validation Constraints

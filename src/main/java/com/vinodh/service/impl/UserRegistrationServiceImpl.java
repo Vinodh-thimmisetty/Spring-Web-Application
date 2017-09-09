@@ -27,7 +27,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
 	@Autowired
 	private EmailService emailService;
-	
+
 	@Autowired
 	private Validator validator;
 
@@ -42,15 +42,14 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	}
 
 	@Override
-	public void saveUserDetails(UserRegistrationForm registrationForm) {
+	public void saveUserDetails(UserRegistrationForm registrationForm) throws MessagingException {
 		// Convert the form Object(DTO) to Entity
 		Mapper mapper = new DozerBeanMapper();
 		ApplicationUser applicationUser = mapper.map(registrationForm, ApplicationUser.class);
 		// Save the Entity
 		userRegistrationDAO.saveUserDetails(applicationUser);
 		// Send Registration Confirmation Link to User
-		try {
-			//@formatter:off
+		//@formatter:off
 			Mail mail =Mail.builder()
 						.mailSubject("Email Verification")
 						.mailFrom("course@spring.com")
@@ -59,14 +58,12 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 						.build();
 			//@formatter:on
 
-			emailService.sendRegistrationVerificatoinEmail(mail, "registration-confirmation.ftl");
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
+		emailService.sendRegistrationVerificatoinEmail(mail, "registration-confirmation.ftl");
+
 	}
 
 	@Override
-	public boolean isValidEmail(String email) { 
+	public boolean isValidEmail(String email) {
 		return userRegistrationDAO.isValidEmail(email);
 	}
 

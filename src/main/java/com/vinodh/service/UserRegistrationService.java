@@ -2,6 +2,8 @@ package com.vinodh.service;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import com.vinodh.dto.UserRegistrationForm;
 
 public interface UserRegistrationService extends ApplicationService {
@@ -9,7 +11,7 @@ public interface UserRegistrationService extends ApplicationService {
 
 	List<String> loadStateDetails(String searchterm);
 
-	void saveUserDetails(UserRegistrationForm registrationForm);
+	void saveUserDetails(UserRegistrationForm registrationForm) throws MessagingException;
 
 	boolean isValidEmail(String email);
 

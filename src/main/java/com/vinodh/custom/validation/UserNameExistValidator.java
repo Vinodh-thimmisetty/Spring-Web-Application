@@ -1,12 +1,10 @@
 package com.vinodh.custom.validation;
 
-import javax.transaction.Transactional;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.vinodh.dao.UserRegistrationDAO;
 import com.vinodh.service.UserRegistrationService;
 import com.vinodh.util.custom.annotations.IsUserNameExists;
 
