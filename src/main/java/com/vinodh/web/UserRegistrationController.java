@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 import org.json.JSONArray;
@@ -61,11 +62,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserRegistrationController {
 
-	private static final  String STATUS = "STATUS";
-	private static final  String SUCCESS = "SUCCESS";
-	private static final  String FAIL = "FAIL";
-	private static final  String ERROR = "ERROR";
-	private static final  String VALIDATION_ERRORS = "VALIDATION_ERRORS";
+	private static final String STATUS = "STATUS";
+	private static final String SUCCESS = "SUCCESS";
+	private static final String VALIDATION_ERRORS = "VALIDATION_ERRORS";
 
 	@Autowired
 	private UserRegistrationService userRegistrationService;
@@ -105,10 +104,11 @@ public class UserRegistrationController {
 	 * @param registrationForm
 	 * @param bindingResult
 	 * @return
+	 * @throws MessagingException
 	 */
 	@PostMapping(value = "/registration")
 	public ResponseEntity<String> handleRegistration(@Valid @ModelAttribute UserRegistrationForm registrationForm,
-			BindingResult bindingResult) {
+			BindingResult bindingResult) throws MessagingException {
 		List<FieldError> fieldErrors = bindingResult.getFieldErrors();
 		JSONArray jsonArray = new JSONArray();
 		if (bindingResult.hasErrors()) {
@@ -117,6 +117,8 @@ public class UserRegistrationController {
 			}
 
 		} else {
+			userRegistrationService.saveUserDetails(registrationForm);
+			log.info("Registration using JSON POST is Successful");
 			jsonArray.put(new JSONObject().put("Redirect", "/course/courseList"));
 		}
 		return ResponseEntity.ok(jsonArray.toString());
@@ -134,17 +136,18 @@ public class UserRegistrationController {
 	 * @param registrationForm
 	 * @param bindingResult
 	 * @return
+	 * @throws MessagingException
 	 */
 	@PostMapping(value = "/registration2")
 	public String handleRegistration2(@Valid @ModelAttribute UserRegistrationForm registrationForm,
-			BindingResult bindingResult) {
+			BindingResult bindingResult) throws MessagingException {
 		if (bindingResult.hasErrors()) {
 			return "userRegistration";
 		} else {
 			// Save the Form Data into Database along with Generated Validation key
 			// Send Registration Confirmation Link to User
 			userRegistrationService.saveUserDetails(registrationForm);
-
+			log.info("Registration using direct FORM submission is Successful");
 			return "redirect:/course/courseList";
 
 		}
@@ -158,16 +161,20 @@ public class UserRegistrationController {
 	 * @param registrationForm
 	 * @param bindingResult
 	 * @return
+	 * @throws MessagingException
 	 */
 	@PostMapping(value = "/registrationEndpoint")
 	public ResponseEntity<Map<String, Object>> handleRegistrationLikeWebserivce(
-			@Valid @ModelAttribute UserRegistrationForm registrationForm, BindingResult bindingResult) {
+			@Valid @ModelAttribute UserRegistrationForm registrationForm, BindingResult bindingResult)
+			throws MessagingException {
 		Map<String, Object> responseBody = new HashMap<>();
 		if (bindingResult.hasErrors()) {
 			responseBody.put("fieldErrors", bindingResult.getFieldErrors());
 			responseBody.put(STATUS, VALIDATION_ERRORS);
 		} else {
+			userRegistrationService.saveUserDetails(registrationForm);
 			responseBody.put(STATUS, SUCCESS);
+			log.info("Registration using JSON POST is Successful");
 			responseBody.put("Redirect", "/course/courseList");
 
 		}

@@ -77,7 +77,8 @@ public class UserRegistrationForm {
 				+ getUserName();
 
 	}
-
+	
+	@Builder.Default
 	private Date tokenCreatedTime = new Date();
 
 	private Long generateSecureRandomNumber() {
