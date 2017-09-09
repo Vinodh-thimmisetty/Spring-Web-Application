@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.transaction.Transactional;
+import javax.validation.Validator;
 
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
@@ -26,6 +27,9 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
 	@Autowired
 	private EmailService emailService;
+	
+	@Autowired
+	private Validator validator;
 
 	@Override
 	public List<String> loadCountryDetails() {
@@ -59,6 +63,16 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public boolean isValidEmail(String email) { 
+		return userRegistrationDAO.isValidEmail(email);
+	}
+
+	@Override
+	public boolean isValidUserName(String userName) {
+		return userRegistrationDAO.isValidUserName(userName);
 	}
 
 }

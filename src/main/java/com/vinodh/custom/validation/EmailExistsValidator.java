@@ -1,18 +1,17 @@
 package com.vinodh.custom.validation;
 
-import javax.transaction.Transactional;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.vinodh.dao.UserRegistrationDAO;
+import com.vinodh.service.UserRegistrationService;
 import com.vinodh.util.custom.annotations.IsEmailExists;
-@Transactional
+
 public class EmailExistsValidator implements ConstraintValidator<IsEmailExists, String> {
 
 	@Autowired
-	private UserRegistrationDAO registrationDAO;
+	private UserRegistrationService userRegistrationService;
 
 	@Override
 	public void initialize(IsEmailExists constraintAnnotation) {
@@ -22,8 +21,12 @@ public class EmailExistsValidator implements ConstraintValidator<IsEmailExists, 
 	@Override
 	public boolean isValid(String email, ConstraintValidatorContext context) {
 		// Check if Email already exits in Database
-		return registrationDAO.isValidEmail(email);
+		return userRegistrationService.isValidEmail(email);
 
 	}
 
+	// Used when validation gets instantiated manually during testing.
+	protected void setUserRegistrationService(UserRegistrationService userRegistrationService) {
+		this.userRegistrationService = userRegistrationService;
+	}
 }

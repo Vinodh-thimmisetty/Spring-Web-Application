@@ -7,12 +7,13 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vinodh.dao.UserRegistrationDAO;
+import com.vinodh.service.UserRegistrationService;
 import com.vinodh.util.custom.annotations.IsUserNameExists;
-@Transactional
+
 public class UserNameExistValidator implements ConstraintValidator<IsUserNameExists, String> {
 
 	@Autowired
-	private UserRegistrationDAO registrationDAO;
+	private UserRegistrationService userRegistrationService;
 
 	@Override
 	public void initialize(IsUserNameExists constraintAnnotation) {
@@ -21,7 +22,11 @@ public class UserNameExistValidator implements ConstraintValidator<IsUserNameExi
 
 	@Override
 	public boolean isValid(String userName, ConstraintValidatorContext context) {
-		return registrationDAO.isValidUserName(userName);
+		return userRegistrationService.isValidUserName(userName);
 	}
 
+	// Used when validation gets instantiated manually during testing.
+	protected void setUserRegistrationService(UserRegistrationService userRegistrationService) {
+		this.userRegistrationService = userRegistrationService;
+	}
 }

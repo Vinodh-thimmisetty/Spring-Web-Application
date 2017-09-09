@@ -4,9 +4,11 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Date;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
+
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import com.vinodh.util.custom.annotations.IsEmailExists;
 import com.vinodh.util.custom.annotations.IsUserNameExists;
@@ -31,39 +33,40 @@ public class UserRegistrationForm {
 
 	private static final String DEFAULT_SECURE_RANDOM_NUMBER = "192837433vinodh4165392087";
 
-	@NotEmpty(message = "Please enter your Username")
-	@Length(min = 8, message = "Min Allowed Length is {2}")
-	//@IsUserNameExists
+	@NotBlank(message = "Please enter your Username")
+	@Length(min = 8, message = "Min Allowed Length is {min}")
+	@IsUserNameExists
 	private String userName;
-	@NotEmpty(message = "Please enter your Password")
-	@Length(min = 8, message = "Min Allowed Length is {2}")
+	@NotBlank(message = "Please enter your Password")
+	@Length(min = 8, message = "Min Allowed Length is {min}")
 	private String userPassword;
-	@NotEmpty(message = "Please confirm your Password")
-	@Length(min = 8, message = "Min Allowed Length is {2}")
+	@NotBlank(message = "Please confirm your Password")
+	@Length(min = 8, message = "Min Allowed Length is {min}")
 	private String userPasswordConfirm;
-	@NotEmpty(message = "Please enter your Email Address")
-	@Length(min = 8, message = "Min Allowed Length is {2}")
+	@NotBlank(message = "Please enter your Email Address")
+	@Length(min = 8, message = "Min Allowed Length is {min}")
 	@ValidEmail
-	//@IsEmailExists
+	@IsEmailExists
 	private String userEmail;
-	@NotEmpty(message = "Please enter your First Name")
-	@Length(min = 2, message = "Min Allowed Length is {2}")
+	@NotBlank(message = "Please enter your First Name")
+	@Length(min = 2, message = "Min Allowed Length is {min}")
 	private String firstName;
-	@NotEmpty(message = "Please enter your Last Name")
-	@Length(min = 2, message = "Min Allowed Length is {2}")
+	@NotBlank(message = "Please enter your Last Name")
+	@Length(min = 2, message = "Min Allowed Length is {min}")
 	private String lastName;
-	@NotEmpty(message = "Please select your country")
-	@Length(min = 3, message = "Min Allowed Length is {2}")
+	@NotBlank(message = "Please select your country")
+	@Length(min = 3, message = "Min Allowed Length is {min}")
 	private String country;
-	@NotEmpty(message = "Please select your State")
-	@Length(min = 3, message = "Min Allowed Length is {2}")
+	@NotBlank(message = "Please select your State")
+	@Length(min = 3, message = "Min Allowed Length is {min}")
 	private String state;
-	@NotEmpty(message = "Please enter your Phone No.")
-	@Length(min = 10, max = 10, message = "Min Allowed Length is {2}")
+	@NotBlank(message = "Please enter your Phone No.")
+	@Length(min = 10, max = 10, message = "Min Allowed Length is {min} and Max Allowed Length is {max}")
 	private String phone;
-	@NotEmpty(message = "Please enter your Gender")
+	@NotBlank(message = "Please enter your Gender")
 	private String gender;
-
+	@Past
+	private Date dateOfBirth;
 	// Generate a secure Random Number to hold the verification token
 	// In case of any Exception, default random number is assigned
 	@Getter(AccessLevel.NONE)

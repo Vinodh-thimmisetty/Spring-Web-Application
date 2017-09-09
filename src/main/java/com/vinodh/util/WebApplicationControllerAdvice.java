@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONException;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.web.bind.WebDataBinder;
@@ -17,7 +18,7 @@ import com.vinodh.custom.exceptions.UserNameExistException;
 
 import lombok.extern.slf4j.Slf4j;
 
-@ControllerAdvice(basePackages="com.vinodh.web")
+@ControllerAdvice(basePackages = "com.vinodh.web")
 @Slf4j
 public class WebApplicationControllerAdvice {
 
@@ -36,4 +37,10 @@ public class WebApplicationControllerAdvice {
 	public void logError(HttpServletRequest request, Exception exception) {
 		log.error("Exception::{}", exception.getMessage());
 	}
+
+	@ExceptionHandler(JSONException.class)
+	public void logJsonException(HttpServletRequest httpServletRequest, Exception exception) {
+		log.error("Json Exceptin is {}", exception.getMessage());
+	}
+
 }

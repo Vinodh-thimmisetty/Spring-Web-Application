@@ -2,6 +2,13 @@ package com.vinodh.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+/**
+ * 
+ * web.xml File
+ * 
+ * @author Vinodh Kumar Thimmisetty
+ *
+ */
 public class SpringWebMVCInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override

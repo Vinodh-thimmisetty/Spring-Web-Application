@@ -1,11 +1,12 @@
 package com.vinodh.web;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -60,6 +61,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserRegistrationController {
 
+	private static final  String STATUS = "STATUS";
+	private static final  String SUCCESS = "SUCCESS";
+	private static final  String FAIL = "FAIL";
+	private static final  String ERROR = "ERROR";
+	private static final  String VALIDATION_ERRORS = "VALIDATION_ERRORS";
+
 	@Autowired
 	private UserRegistrationService userRegistrationService;
 
@@ -104,17 +111,13 @@ public class UserRegistrationController {
 			BindingResult bindingResult) {
 		List<FieldError> fieldErrors = bindingResult.getFieldErrors();
 		JSONArray jsonArray = new JSONArray();
-		try {
-			if (bindingResult.hasErrors()) {
-				for (FieldError fieldError : fieldErrors) {
-					jsonArray.put(new JSONObject().put(fieldError.getField(), fieldError.getDefaultMessage()));
-				}
-
-			} else {
-				jsonArray.put(new JSONObject().put("Redirect", "/course/courseList"));
+		if (bindingResult.hasErrors()) {
+			for (FieldError fieldError : fieldErrors) {
+				jsonArray.put(new JSONObject().put(fieldError.getField(), fieldError.getDefaultMessage()));
 			}
-		} catch (JSONException e) {
-			log.error("Exception While handling the JSON in registration {}", e);
+
+		} else {
+			jsonArray.put(new JSONObject().put("Redirect", "/course/courseList"));
 		}
 		return ResponseEntity.ok(jsonArray.toString());
 	}
@@ -145,6 +148,31 @@ public class UserRegistrationController {
 			return "redirect:/course/courseList";
 
 		}
+	}
+
+	/**
+	 * This is similar to registration POST action but the ResponseEntity is treated
+	 * as Map. Any API related Endpoint, we need to implement like this
+	 * 
+	 * 
+	 * @param registrationForm
+	 * @param bindingResult
+	 * @return
+	 */
+	@PostMapping(value = "/registrationEndpoint")
+	public ResponseEntity<Map<String, Object>> handleRegistrationLikeWebserivce(
+			@Valid @ModelAttribute UserRegistrationForm registrationForm, BindingResult bindingResult) {
+		Map<String, Object> responseBody = new HashMap<>();
+		if (bindingResult.hasErrors()) {
+			responseBody.put("fieldErrors", bindingResult.getFieldErrors());
+			responseBody.put(STATUS, VALIDATION_ERRORS);
+		} else {
+			responseBody.put(STATUS, SUCCESS);
+			responseBody.put("Redirect", "/course/courseList");
+
+		}
+
+		return ResponseEntity.ok(responseBody);
 	}
 
 }
