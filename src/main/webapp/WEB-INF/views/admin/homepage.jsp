@@ -18,43 +18,27 @@
 	content="This page holds information of different Courses available which can be monitored by ADMIN">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="all,follow">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <!-- jQuery library -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="/Spring-Security/webjars/jquery/jquery.min.js"></script>
+<script type="text/javascript"
+	src="/Spring-Security/webjars/jquery-ui/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="/Spring-Security/webjars/jquery-ui/jquery-ui.css">
 
-<!-- Latest compiled JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script
-	src=https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.js></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript"
+	src="/Spring-Security/webjars/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript"
+	src="/Spring-Security/webjars/bootstrapvalidator/js/bootstrapValidator.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="/Spring-Security/webjars/bootstrap/css/bootstrap.css">
 
-<!-- Google fonts - Roboto -->
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
-<!-- theme stylesheet-->
-<link rel="stylesheet" href="css/style.default.css"
-	id="theme-stylesheet">
-<!-- Custom stylesheet - for your changes-->
-<link rel="stylesheet" href="css/custom.css">
-<!-- Favicon-->
-<link rel="shortcut icon" href="img/favicon.ico">
-<!-- Font Awesome CDN-->
-<!-- you can replace it by local Font Awesome-->
-<script src="https://use.fontawesome.com/99347ac47f.js"></script>
-<!-- Font Icons CSS-->
-<link rel="stylesheet"
-	href="https://file.myfontastic.com/da58YPMQ7U5HY8Rb6UxkNf/icons.css">
-<!-- Tweaks for older IEs-->
-<!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
+<script type="text/javascript"
+	src="/Spring-Security/webjars/tablesorter/js/jquery.tablesorter.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="/Spring-Security/webjars/tablesorter/css/theme.default.css" />
 
 <style type="text/css">
 #success_message {
@@ -71,5 +55,17 @@
 </style>
 </head>
 <body>
+<body>
+	<div class="container">
+		<br />
+		<button class="btn btn-success" value="Vinodh"></button>
+		<div class="alert alert-success">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+			<strong>Success!</strong> It is working as we expected.
+		</div>
+	</div>
 </body>
+
+</body>
+
 </html>

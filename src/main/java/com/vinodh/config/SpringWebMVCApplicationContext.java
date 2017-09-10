@@ -44,6 +44,8 @@ public class SpringWebMVCApplicationContext extends WebMvcConfigurerAdapter {
 	 */
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
+		registry.addResourceHandler("/webjars/**").addResourceLocations("/webjars/").resourceChain(true);
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 		registry.addResourceHandler("/static/**").addResourceLocations("/static/");
 	}

@@ -42,7 +42,7 @@ public class AdminInstructorsDashboard {
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
-	@GetMapping("/{courseId}")
+	@GetMapping("/{instructorId}")
 	public ResponseEntity<Instructor> getInstructor() {
 		Instructor instructor = null;
 		return ResponseEntity.ok(instructor);

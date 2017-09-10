@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// Ordering has to be from most specific to Least Specific URL Pattern
 		 http
 		 	.authorizeRequests() 
-		 		.antMatchers("/resources/**").permitAll()
+		 		.antMatchers("/resources/**","/webjars/**").permitAll()
 		 		.antMatchers("/", "/home").permitAll()
 		 		.antMatchers("/admin/**").access("hasRole('ADMIN')")
 		 		.antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
