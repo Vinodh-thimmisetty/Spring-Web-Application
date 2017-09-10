@@ -48,3 +48,4 @@
 
 ## Helpful Github Repos used
  	1. Dozer for Object Mappings: https://github.com/DozerMapper/dozer/
+	2. POJO Tester http://www.pojo.pl/. Drastic Increase in Code Coverag %
