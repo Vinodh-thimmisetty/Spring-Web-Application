@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration
 @ComponentScan(basePackages = { "com.vinodh" }, excludeFilters = {
-		@ComponentScan.Filter(type = FilterType.REGEX, pattern = "com.vinodh.web.*") })
+		@ComponentScan.Filter(type = FilterType.REGEX, pattern = { "com.vinodh.web.*", "com.vinodh.config.test.*" }) })
 @Import(value = { DatabaseConfig.class, EmailConfig.class })
 public class SpringRootApplicationContext {
 }
