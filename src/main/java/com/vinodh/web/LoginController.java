@@ -32,7 +32,7 @@ public class LoginController {
 	@GetMapping(value = "/admin")
 	public String adminPage(ModelMap map) {
 		map.addAttribute("user", getPrincipal());
-		return "/admin";
+		return "adminView";
 	}
 
 	@GetMapping(value = "/db")
@@ -49,7 +49,7 @@ public class LoginController {
 
 	@GetMapping(value = "/login")
 	public String loginPage() {
-		return "login";
+		return "loginView";
 	}
 
 	@PostMapping(value = "/loginSuccess")
@@ -66,7 +66,7 @@ public class LoginController {
 		return "redirect:/login?logout";
 	}
 
-	@GetMapping(value = "/customUser_Secure")
+	/*	@GetMapping(value = "/customUser_Secure")
 	public String loggedInUserSecure(ModelMap model) {
 		model.addAttribute("user", getUser());
 		return CUSTOM_LOGIN_SUCCESS;
@@ -97,7 +97,7 @@ public class LoginController {
 		user.setFirstName("Vinodh Kumar Thimmisetty");
 		return user;
 	}
-
+*/
 	private String getPrincipal() {
 		String userName = null;
 		SecurityContext context = SecurityContextHolder.getContext();
