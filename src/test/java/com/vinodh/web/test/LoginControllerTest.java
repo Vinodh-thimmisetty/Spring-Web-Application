@@ -48,7 +48,7 @@ public class LoginControllerTest {
 		mockMvc.perform(get("/Access_Denied")).andExpect(model().attribute("user", "user"))
 				.andExpect(view().name("accessDenied")).andExpect(status().isOk());
 
-		mockMvc.perform(get("/login")).andExpect(view().name("loginView")).andExpect(status().isOk());
+		//mockMvc.perform(get("/login")).andExpect(view().name("loginView")).andExpect(status().isOk());
 
 		mockMvc.perform(post("/loginSuccess")).andExpect(view().name("redirect:/" + CUSTOM_LOGIN_SUCCESS))
 				.andExpect(status().is3xxRedirection());

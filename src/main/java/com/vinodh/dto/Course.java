@@ -20,6 +20,7 @@ public class Course {
 	private String courseDescription;
 	private Date courseStartDate;
 	private long coursePrice;
+	private String courseTechnology;
 	private Instructor courseInstructor;
 
 }
