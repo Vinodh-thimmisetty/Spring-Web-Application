@@ -23,14 +23,14 @@ public class PojoTester_Test {
 		@Override
 		public Class<?>[] getClasses() {
 			return new Class[] { UserRegistrationForm.class, Course.class, Employee.class, Instructor.class,
-					Mail.class, ApplicationUser.class };
+					Mail.class, ApplicationUser.class};
 		}
 	};
 
 	@Test
 	public void pojoTester() {
 		final Class<?>[] testDTOClass = { UserRegistrationForm.class, Course.class, Employee.class, Instructor.class,
-				Mail.class, ApplicationUser.class,Car.class };
+				Mail.class, ApplicationUser.class };
 
 		final Class<?>[] testEntityClass = { com.vinodh.entity.ApplicationUser.class, Country.class, State.class,
 				com.vinodh.entity.Employee.class };
