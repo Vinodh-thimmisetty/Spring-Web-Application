@@ -43,7 +43,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<hibernate.version>5.2.10.Final</hibernate.version>
-		<hsqldb.version>2.4.0</hsqldb.version> 
+		<hsqldb.version>2.4.0</hsqldb.version>
 	</properties>
 
 	<dependencies>
@@ -187,6 +187,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
