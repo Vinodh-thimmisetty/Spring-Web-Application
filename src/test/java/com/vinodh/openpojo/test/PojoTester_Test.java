@@ -30,7 +30,7 @@ public class PojoTester_Test {
 	@Test
 	public void pojoTester() {
 		final Class<?>[] testDTOClass = { UserRegistrationForm.class, Course.class, Employee.class, Instructor.class,
-				Mail.class, ApplicationUser.class,Car.class };
+				Mail.class, ApplicationUser.class };
 
 		final Class<?>[] testEntityClass = { com.vinodh.entity.ApplicationUser.class, Country.class, State.class,
 				com.vinodh.entity.Employee.class };
