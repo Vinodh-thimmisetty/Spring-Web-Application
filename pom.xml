@@ -16,6 +16,10 @@
 
 	<repositories>
 		<repository>
+			<id>jcenter</id>
+			<url>http://jcenter.bintray.com/</url>
+		</repository>
+		<repository>
 			<id>maven.oracle.com</id>
 			<releases>
 				<enabled>true</enabled>
@@ -43,6 +47,19 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>pl.pojo</groupId>
+			<artifactId>pojo-tester</artifactId>
+			<version>0.7.5</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.openpojo/openpojo -->
+	<!-- 	<dependency>
+			<groupId>com.openpojo</groupId>
+			<artifactId>openpojo</artifactId>
+			<version>0.8.6</version>
+			<scope>test</scope>
+		</dependency> -->
+
 		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
 		<!-- <dependency> <groupId>org.mockito</groupId> <artifactId>mockito-all</artifactId> 
 			<version>1.9.5</version> <scope>test</scope> </dependency> -->
@@ -98,8 +115,8 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate.version}</version>
-		</dependency><!-- 
-		<dependency>
+		</dependency>
+		<!-- <dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc7</artifactId>
 			<scope>compile</scope>
@@ -233,6 +250,9 @@
 				<configuration>
 					<destFile>${basedir}/target/jacoco.exec</destFile>
 					<dataFile>${basedir}/target/jacoco.exec</dataFile>
+					<excludes>
+						<exclude>**/demo/**/*</exclude>
+					</excludes>
 				</configuration>
 				<executions>
 					<execution>
