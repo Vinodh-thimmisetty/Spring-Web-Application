@@ -69,4 +69,11 @@ public class UserRegistrationDAOImpl implements UserRegistrationDAO {
 
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ApplicationUser> loadAllUserDetails() {
+		Session currentSession = sessionFactory.getCurrentSession();
+		return (List<ApplicationUser>) currentSession.createNamedQuery("load.allUsers");
+	}
+
 }

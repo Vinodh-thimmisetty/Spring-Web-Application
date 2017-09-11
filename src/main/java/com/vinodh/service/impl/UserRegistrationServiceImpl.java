@@ -1,6 +1,7 @@
 package com.vinodh.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.mail.MessagingException;
 import javax.transaction.Transactional;
@@ -68,4 +69,10 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 		return userRegistrationDAO.isValidUserName(userName);
 	}
 
+	@Override
+	public List<UserRegistrationForm> loadAllUserDetails() {
+		List<ApplicationUser> applicationUsers = userRegistrationDAO.loadAllUserDetails();
+		return applicationUsers.stream().map(x -> new DozerBeanMapper().map(x, UserRegistrationForm.class))
+				.collect(Collectors.toList());
+	}
 }

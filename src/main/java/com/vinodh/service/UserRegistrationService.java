@@ -16,4 +16,6 @@ public interface UserRegistrationService extends ApplicationService {
 	boolean isValidEmail(String email);
 
 	boolean isValidUserName(String userName);
+
+	List<UserRegistrationForm> loadAllUserDetails();
 }

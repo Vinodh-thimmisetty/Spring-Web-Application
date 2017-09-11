@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.vinodh.dto.ApplicationUser;
+import com.vinodh.dto.UserRegistrationForm;
+import com.vinodh.service.UserRegistrationService;
 
 public class AdminUserDetailsDashBoard {
 
@@ -23,10 +26,15 @@ public class AdminUserDetailsDashBoard {
 	public static final String VALIDATION_ERRORS = "VALIDATION_ERRORS";
 	public static final String STATUS = "STATUS";
 
+	@Autowired
+	UserRegistrationService userRegistrationService;
+
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/loadUserDetailsPage")
 	public String loadUserDetailsPage(Model model) {
-		model.addAttribute("user", new ApplicationUser());
+		// Get All Users List
+		List<UserRegistrationForm> usersList = userRegistrationService.loadAllUserDetails();
+		model.addAttribute("usersList", usersList);
 		return "/admin/usersList";
 	}
 

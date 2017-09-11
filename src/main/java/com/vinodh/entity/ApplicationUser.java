@@ -24,6 +24,7 @@ import lombok.NoArgsConstructor;
 @Table(schema = "VINODH", name = "USER_INFORMATION")
 @NamedQuery(name = "email.exists", query = "from ApplicationUser a where UPPER(TRIM(a.userEmail)) = UPPER(TRIM(:userEmail))")
 @NamedQuery(name = "username.exists", query = "from ApplicationUser a where UPPER(TRIM(a.userName)) = UPPER(TRIM(:userName))")
+@NamedQuery(name = "load.allUsers", query = "from ApplicatoinUser")
 public class ApplicationUser implements Serializable {
 
 	private static final long serialVersionUID = 1706865056988491882L;
@@ -50,7 +51,7 @@ public class ApplicationUser implements Serializable {
 	private String phone;
 	@Column(name = "USER_GENDER")
 	private String gender;
- 	@Column(name = "EMAIL_VALIDATION_KEY")
+	@Column(name = "EMAIL_VALIDATION_KEY")
 	private String emailValidationToken;
 	@Column(name = "TOKEN_GENERATED_TIME")
 	@Temporal(TemporalType.DATE)

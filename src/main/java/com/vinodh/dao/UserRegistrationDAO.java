@@ -14,4 +14,6 @@ public interface UserRegistrationDAO {
 	boolean isValidEmail(String userEmail);
 
 	boolean isValidUserName(String userName);
+
+	List<ApplicationUser> loadAllUserDetails();
 }

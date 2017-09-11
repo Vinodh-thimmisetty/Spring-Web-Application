@@ -17,36 +17,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.vinodh.dto.ApplicationUser;
 
-public class AdminUserDetailsDashBoard {
+public class AdminDetailsDashBoard {
 
 	public static final String SUCCESS = "SUCCESS";
 	public static final String VALIDATION_ERRORS = "VALIDATION_ERRORS";
 	public static final String STATUS = "STATUS";
 
 	@PreAuthorize("hasRole('ADMIN')")
-	@GetMapping("/loadUserDetailsPage")
-	public String loadHomePage(Model model) {
-		model.addAttribute("user", new ApplicationUser());
-		return "/admin/usersList";
+	@GetMapping("/loadAdminDetailsPage")
+	public String loadAdminDetailsPage(Model model) {
+		model.addAttribute("adminsList", new ApplicationUser());
+		return "/admin/adminList";
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
-	@GetMapping("/listAllUsers")
+	@GetMapping("/listAllAdmins")
 	public ResponseEntity<List<ApplicationUser>> listAllCourses() {
-		List<ApplicationUser> users = Collections.emptyList();
-		return ResponseEntity.ok(users);
+		List<ApplicationUser> admins = Collections.emptyList();
+		return ResponseEntity.ok(admins);
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
-	@GetMapping("/{userId}")
-	public ResponseEntity<ApplicationUser> getUser() {
-		ApplicationUser user = null;
-		return ResponseEntity.ok(user);
+	@GetMapping("/{adminUserId}")
+	public ResponseEntity<ApplicationUser> getAdmin() {
+		ApplicationUser admin = null;
+		return ResponseEntity.ok(admin);
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
-	@PostMapping(value = "/addNewUser")
-	public ResponseEntity<Map<String, Object>> addNewUser(@Valid @RequestBody ApplicationUser applicationUser,
+	@PostMapping(value = "/addNewAdmin")
+	public ResponseEntity<Map<String, Object>> addNewAdmin(@Valid @RequestBody ApplicationUser applicationUser,
 			BindingResult bindingResult) {
 		Map<String, Object> fieldErrors = Collections.emptyMap();
 		if (bindingResult.hasFieldErrors()) {
@@ -59,16 +59,16 @@ public class AdminUserDetailsDashBoard {
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
-	@PostMapping(value = "{userId}/updateUser")
-	public ResponseEntity<Map<String, Object>> updateUser(@PathVariable("userId") int userId,
+	@PostMapping(value = "{adminUserId}/updateUser")
+	public ResponseEntity<Map<String, Object>> updateAdmin(@PathVariable("adminUserId") int adminUserId,
 			@RequestBody ApplicationUser applicationUser) {
 
 		return null;
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
-	@PostMapping(value = "{userId}/deleteUser")
-	public ResponseEntity<Map<String, Object>> deleteUser(@PathVariable("userId") int userId,
+	@PostMapping(value = "{adminUserId}/deleteUser")
+	public ResponseEntity<Map<String, Object>> deleteAdmin(@PathVariable("adminUserId") int adminUserId,
 			@RequestBody ApplicationUser applicationUser) {
 
 		return null;
