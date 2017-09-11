@@ -9,17 +9,21 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.vinodh.dto.ApplicationUser;
 import com.vinodh.dto.UserRegistrationForm;
 import com.vinodh.service.UserRegistrationService;
 
+@Controller
+@RequestMapping("/admin")
 public class AdminUserDetailsDashBoard {
 
 	public static final String SUCCESS = "SUCCESS";
@@ -40,8 +44,8 @@ public class AdminUserDetailsDashBoard {
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/listAllUsers")
-	public ResponseEntity<List<ApplicationUser>> listAllUsers() {
-		List<ApplicationUser> users = Collections.emptyList();
+	public ResponseEntity<List<UserRegistrationForm>> listAllUsers() {
+		List<UserRegistrationForm> users = userRegistrationService.loadAllUserDetails();
 		return ResponseEntity.ok(users);
 	}
 

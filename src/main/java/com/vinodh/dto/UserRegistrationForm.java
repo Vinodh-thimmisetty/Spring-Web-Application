@@ -32,6 +32,7 @@ public class UserRegistrationForm {
 
 	private static final String DEFAULT_SECURE_RANDOM_NUMBER = "192837433vinodh4165392087";
 
+	private Long id;
 	@NotBlank(message = "Please enter your Username")
 	@Length(min = 8, message = "Min Allowed Length is {min}")
 	@IsUserNameExists
@@ -68,7 +69,7 @@ public class UserRegistrationForm {
 	private Date dateOfBirth;
 	// Generate a secure Random Number to hold the verification token
 	// In case of any Exception, default random number is assigned
-	@Getter//(AccessLevel.NONE)
+	@Getter // (AccessLevel.NONE)
 	private String emailValidationToken;
 
 	public String getCustomEmailValidationToken() {
@@ -76,7 +77,7 @@ public class UserRegistrationForm {
 				+ getUserName();
 
 	}
-	
+
 	@Builder.Default
 	private Date tokenCreatedTime = new Date();
 
