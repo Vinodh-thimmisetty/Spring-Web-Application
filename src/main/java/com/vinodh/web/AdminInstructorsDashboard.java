@@ -29,7 +29,7 @@ public class AdminInstructorsDashboard {
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/loadInstructorDetailsPage")
-	public String loadHomePage(Model model) {
+	public String loadInstructorDetailsPage(Model model) {
 		model.addAttribute("instructor", new Instructor());
 		return "/admin/instructorsList";
 	}

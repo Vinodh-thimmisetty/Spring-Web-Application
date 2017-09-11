@@ -29,7 +29,7 @@ public class AdminCourseListDashBoard {
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/loadCourseHomePage")
-	public String loadHomePage(Model model) {
+	public String loadCourseHomePage(Model model) {
 		model.addAttribute("course", new Course());
 		return "/admin/coursesList";
 	}

@@ -25,14 +25,14 @@ public class AdminUserDetailsDashBoard {
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/loadUserDetailsPage")
-	public String loadUserDetailsPage(Model model) {
+	public String loadHomePage(Model model) {
 		model.addAttribute("user", new ApplicationUser());
 		return "/admin/usersList";
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/listAllUsers")
-	public ResponseEntity<List<ApplicationUser>> listAllUsers() {
+	public ResponseEntity<List<ApplicationUser>> listAllCourses() {
 		List<ApplicationUser> users = Collections.emptyList();
 		return ResponseEntity.ok(users);
 	}
