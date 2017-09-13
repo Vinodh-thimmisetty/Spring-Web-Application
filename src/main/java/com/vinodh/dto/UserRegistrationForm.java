@@ -10,6 +10,7 @@ import javax.validation.constraints.Past;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vinodh.util.custom.annotations.IsEmailExists;
 import com.vinodh.util.custom.annotations.IsUserNameExists;
 import com.vinodh.util.custom.annotations.PasswordMatches;
@@ -72,6 +73,7 @@ public class UserRegistrationForm {
 	@Getter // (AccessLevel.NONE)
 	private String emailValidationToken;
 
+	@JsonIgnore
 	public String getCustomEmailValidationToken() {
 		return StringUtils.defaultIfBlank(String.valueOf(generateSecureRandomNumber()), DEFAULT_SECURE_RANDOM_NUMBER)
 				+ getUserName();
