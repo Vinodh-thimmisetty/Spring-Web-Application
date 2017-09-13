@@ -52,6 +52,9 @@
 	</script>
 	<div class="container">
 
+		Language : <a href="?language=en">English</a>| <a
+			href="?language=zh_CN">Chinese</a> | <a href="?language=de">Deustch</a>
+		| <a href="?language=fr">French</a>
 		<!-- Action is submitted using Ajax after CLient Side Validations -->
 		<%-- <form:form class="well form-horizontal"
 			action="${pageContext.request.contextPath}/user/registration"

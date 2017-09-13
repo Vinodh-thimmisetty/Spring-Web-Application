@@ -25,6 +25,7 @@ import lombok.NoArgsConstructor;
 @NamedQuery(name = "email.exists", query = "from ApplicationUser a where UPPER(TRIM(a.userEmail)) = UPPER(TRIM(:userEmail))")
 @NamedQuery(name = "username.exists", query = "from ApplicationUser a where UPPER(TRIM(a.userName)) = UPPER(TRIM(:userName))")
 @NamedQuery(name = "load.allUsers", query = "from ApplicationUser")
+@NamedQuery(name = "delete.user", query =" delete ApplicationUser where id=:userId")
 public class ApplicationUser implements Serializable {
 
 	private static final long serialVersionUID = 1706865056988491882L;

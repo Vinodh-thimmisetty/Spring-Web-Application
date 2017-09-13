@@ -34,11 +34,12 @@
 <link rel="stylesheet" type="text/css"
 	href="/Spring-Security/webjars/bootstrap/css/bootstrap.css">
 
-<!-- 
-<script type="text/javascript"
-	src="/Spring-Security/webjars/tablesorter/js/jquery.tablesorter.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="/Spring-Security/webjars/tablesorter/css/theme.default.css" /> -->
+	href="/Spring-Security/webjars/font-awesome/css/font-awesome.css" />
+
+<script type="text/javascript"
+	src="/Spring-Security/webjars/popper.js/dist/umd/popper.js"></script>
+
 
 
 <script type="text/javascript"
@@ -70,12 +71,12 @@
 </head>
 <body>
 <body>
-	<div class="container">
+	<div class="container-fluid">
 		<table
-			class="table table-bordered table-striped table-hover table-responsive"
+			class="table table-sm table-bordered table-hover table-responsive"
 			id="listOfRegisteredUsers">
 			<thead>
-				<tr class="thead-inverse table-success">
+				<tr class="thead table-success">
 					<th>User Id</th>
 					<th>First Name</th>
 					<th>Last Name</th>
@@ -86,10 +87,11 @@
 					<th>User Country</th>
 					<th>User State</th>
 					<th>User Phone</th>
+					<th>Action</th>
 				</tr>
 			</thead>
 			<tfoot>
-				<tr class="thead-inverse">
+				<tr class="thead table-success">
 					<th>User Id</th>
 					<th>First Name</th>
 					<th>Last Name</th>
@@ -100,6 +102,7 @@
 					<th>User Country</th>
 					<th>User State</th>
 					<th>User Phone</th>
+					<th>Action</th>
 				</tr>
 			</tfoot>
 		</table>

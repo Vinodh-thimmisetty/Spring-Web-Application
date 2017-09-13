@@ -45,11 +45,13 @@
 		<hibernate.version>5.2.10.Final</hibernate.version>
 		<hsqldb.version>2.4.0</hsqldb.version>
 		<webjar-locator.version>0.32</webjar-locator.version>
-		<bootstrap.version>3.3.7</bootstrap.version>
+		<bootstrap.version>4.0.0-beta</bootstrap.version>
+		<popper.version>1.12.5</popper.version>
 		<jquery.version>3.2.1</jquery.version>
 		<jquery-ui.version>1.12.1</jquery-ui.version>
 		<datatables.version>1.10.15</datatables.version>
 		<tablesorter.version>2.25.4</tablesorter.version>
+		<font-awesome.version>4.7.0</font-awesome.version>
 	</properties>
 
 	<dependencies>
@@ -66,6 +68,19 @@
 			<artifactId>bootstrap</artifactId>
 			<version>${bootstrap.version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars.bower/popper.js -->
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>popper.js</artifactId>
+			<version>${popper.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars/font-awesome -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>font-awesome</artifactId>
+			<version>${font-awesome.version}</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -93,12 +108,8 @@
 			<version>0.7.5</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.openpojo/openpojo -->
-	<!-- 	<dependency>
-			<groupId>com.openpojo</groupId>
-			<artifactId>openpojo</artifactId>
-			<version>0.8.6</version>
-			<scope>test</scope>
-		</dependency> -->
+		<!-- <dependency> <groupId>com.openpojo</groupId> <artifactId>openpojo</artifactId> 
+			<version>0.8.6</version> <scope>test</scope> </dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
 		<!-- <dependency> <groupId>org.mockito</groupId> <artifactId>mockito-all</artifactId> 

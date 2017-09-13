@@ -16,4 +16,6 @@ public interface UserRegistrationDAO {
 	boolean isValidUserName(String userName);
 
 	List<ApplicationUser> loadAllUserDetails();
+
+	int deleteUser(int userId);
 }

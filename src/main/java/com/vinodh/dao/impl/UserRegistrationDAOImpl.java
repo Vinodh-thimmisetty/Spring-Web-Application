@@ -68,12 +68,18 @@ public class UserRegistrationDAOImpl implements UserRegistrationDAO {
 		return query.getResultList().isEmpty();
 
 	}
- 
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ApplicationUser> loadAllUserDetails() {
 		Session currentSession = sessionFactory.getCurrentSession();
 		return (List<ApplicationUser>) currentSession.createNamedQuery("load.allUsers").getResultList();
+	}
+
+	@Override
+	public int deleteUser(int userId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		return currentSession.createNamedQuery("delete.user").setParameter("userId", userId).executeUpdate();
 	}
 
 }

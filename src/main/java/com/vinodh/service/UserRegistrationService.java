@@ -18,4 +18,6 @@ public interface UserRegistrationService extends ApplicationService {
 	boolean isValidUserName(String userName);
 
 	List<UserRegistrationForm> loadAllUserDetails();
+
+	int deleteUser(int userId);
 }

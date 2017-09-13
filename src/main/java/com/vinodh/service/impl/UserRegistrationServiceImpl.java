@@ -75,4 +75,9 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 		return applicationUsers.stream().map(x -> new DozerBeanMapper().map(x, UserRegistrationForm.class))
 				.collect(Collectors.toList());
 	}
+
+	@Override
+	public int deleteUser(int userId) {
+		return userRegistrationDAO.deleteUser(userId);
+	}
 }

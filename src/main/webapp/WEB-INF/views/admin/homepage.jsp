@@ -4,7 +4,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <!-- Any Tracking related stuff or CSS or JS content must load in HEAD section -->
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -16,9 +16,12 @@
 <title>Course Registration Dashboard</title>
 <meta name="description"
 	content="This page holds information of different Courses available which can be monitored by ADMIN">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- To ensure proper rendering and touch zooming on mobile devices -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="all,follow">
 
+<!-- Any JavaScript is advised to place at the end of the document so the pages load faster -->
 <!-- jQuery library -->
 <script type="text/javascript"
 	src="/Spring-Security/webjars/jquery/jquery.min.js"></script>
@@ -33,12 +36,18 @@
 	src="/Spring-Security/webjars/bootstrapvalidator/js/bootstrapValidator.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="/Spring-Security/webjars/bootstrap/css/bootstrap.css">
+<script type="text/javascript"
+	src="/Spring-Security/webjars/webjars/popper.js/dist/umd/popper.js"></script>
 
 
 <script type="text/javascript"
 	src="/Spring-Security/webjars/tablesorter/js/jquery.tablesorter.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="/Spring-Security/webjars/tablesorter/css/theme.default.css" />
+
+<link rel="stylesheet" type="text/css"
+	href="/Spring-Security/webjars/font-awesome/css/font-awesome.css" />
+
 
 <style type="text/css">
 #success_message {
