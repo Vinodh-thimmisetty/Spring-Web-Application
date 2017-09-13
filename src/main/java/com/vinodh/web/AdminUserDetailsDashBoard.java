@@ -1,18 +1,16 @@
 package com.vinodh.web;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.Valid;
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,12 +19,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.vinodh.dto.ApplicationUser;
 import com.vinodh.dto.UserRegistrationForm;
 import com.vinodh.service.UserRegistrationService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @RequestMapping("/admin")
+@Slf4j
 public class AdminUserDetailsDashBoard {
 
 	public static final String SUCCESS = "SUCCESS";
@@ -54,39 +54,34 @@ public class AdminUserDetailsDashBoard {
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/{userId}")
-	public ResponseEntity<ApplicationUser> getUser() {
-		ApplicationUser user = null;
-		return ResponseEntity.ok(user);
+	public ResponseEntity<UserRegistrationForm> getUser(@PathVariable("userId") int userId) {
+		return ResponseEntity.ok(userRegistrationService.loadUserDetail(userId));
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "/addNewUser")
-	public ResponseEntity<Map<String, Object>> addNewUser(@Valid @RequestBody ApplicationUser applicationUser,
-			BindingResult bindingResult) {
-		Map<String, Object> fieldErrors = Collections.emptyMap();
-		if (bindingResult.hasFieldErrors()) {
-			fieldErrors.put(STATUS, VALIDATION_ERRORS);
-		} else {
-
-			fieldErrors.put(STATUS, SUCCESS);
-		}
+	public ResponseEntity<Map<String, Object>> addNewUser(@RequestBody UserRegistrationForm user)
+			throws MessagingException {
+		Map<String, Object> fieldErrors = new HashMap<>();
+		userRegistrationService.saveUserDetails(user);
+		fieldErrors.put(STATUS, SUCCESS);
 		return ResponseEntity.ok(fieldErrors);
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping(value = "{userId}/updateUser")
 	public ResponseEntity<Map<String, Object>> updateUser(@PathVariable("userId") int userId,
-			@RequestBody ApplicationUser applicationUser) {
-
-		return null;
+			@RequestBody UserRegistrationForm user) {
+		Map<String, Object> responseBody = new HashMap<>();
+		responseBody.put(STATUS, userRegistrationService.updateUser(user));
+		return ResponseEntity.ok(responseBody);
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping(value = "{userId}/deleteUser")
-	public ResponseEntity<Map<String, Object>> deleteUser(@PathVariable("userId") int userId,
-			@RequestBody ApplicationUser applicationUser) {
+	public ResponseEntity<Map<String, Object>> deleteUser(@PathVariable("userId") int userId) {
 		Map<String, Object> responseBody = new HashMap<>();
-		responseBody.put("Status", userRegistrationService.deleteUser(userId));
+		responseBody.put(STATUS, userRegistrationService.deleteUser(userId));
 		return ResponseEntity.ok(responseBody);
 	}
 

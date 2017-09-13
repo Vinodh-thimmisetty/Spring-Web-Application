@@ -80,4 +80,14 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	public int deleteUser(int userId) {
 		return userRegistrationDAO.deleteUser(userId);
 	}
+
+	@Override
+	public int updateUser(UserRegistrationForm user) { 
+		return 0;
+	}
+
+	@Override
+	public UserRegistrationForm loadUserDetail(int userId) { 
+		return null;
+	}
 }

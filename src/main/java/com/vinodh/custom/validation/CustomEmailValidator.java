@@ -6,8 +6,11 @@ import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.springframework.stereotype.Component;
+
 import com.vinodh.util.custom.annotations.ValidEmail;
 
+@Component
 public class CustomEmailValidator implements ConstraintValidator<ValidEmail, String> {
 
 	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@"

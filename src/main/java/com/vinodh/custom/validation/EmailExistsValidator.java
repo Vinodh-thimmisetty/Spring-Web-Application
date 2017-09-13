@@ -4,10 +4,12 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.vinodh.service.UserRegistrationService;
 import com.vinodh.util.custom.annotations.IsEmailExists;
 
+@Component
 public class EmailExistsValidator implements ConstraintValidator<IsEmailExists, String> {
 
 	@Autowired
