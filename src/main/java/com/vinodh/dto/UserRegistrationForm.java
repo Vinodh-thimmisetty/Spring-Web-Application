@@ -27,8 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @PasswordMatches
 @Slf4j
-@Builder
-@PasswordMatches
+@Builder 
 public class UserRegistrationForm {
 
 	private static final String DEFAULT_SECURE_RANDOM_NUMBER = "192837433vinodh4165392087";
