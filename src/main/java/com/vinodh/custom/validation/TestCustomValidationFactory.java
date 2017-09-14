@@ -40,14 +40,12 @@ public class TestCustomValidationFactory extends SpringWebConstraintValidatorFac
 		if (constraintValidator instanceof EmailExistsValidator) {
 			log.info("Validating Custom Email:::");
 			EmailExistsValidator emailExistsValidator = (EmailExistsValidator) constraintValidator;
-			emailExistsValidator.setUserRegistrationService((UserRegistrationService) service);
-			constraintValidator = emailExistsValidator;
+			emailExistsValidator.setUserRegistrationService((UserRegistrationService) service); 
 		}
 		if (constraintValidator instanceof UserNameExistValidator) {
 			log.info("Validating Custom User Email:::");
 			UserNameExistValidator userNameExistValidator = (UserNameExistValidator) constraintValidator;
-			userNameExistValidator.setUserRegistrationService((UserRegistrationService) service);
-			constraintValidator = userNameExistValidator;
+			userNameExistValidator.setUserRegistrationService((UserRegistrationService) service); 
 		}
 		return (T) constraintValidator;
 
