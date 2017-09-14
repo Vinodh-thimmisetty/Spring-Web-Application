@@ -26,7 +26,6 @@ public class EmailConfig {
 		javaMailProperties.put("mail.smtp.host", "smtp.gmail.com");
 		javaMailProperties.put("mail.smtp.socketFactory.port", "465");
 		javaMailProperties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-		javaMailProperties.put("mail.smtp.auth", "true");
 		// Load Mail Properties to Mail Sender
 		mailSender.setJavaMailProperties(javaMailProperties);
 
