@@ -35,7 +35,7 @@ public class FiltersTest {
 		basicFilter.init(mockFilterConfig);
 		basicFilter.doFilter(mockHttpServletRequest, mockHttpServletResponse, mockFilterChain);
 		basicFilter.destroy();
-		Assert.assertEquals(mockHttpServletResponse.getStatus(), 200);
+		Assert.assertEquals(200,mockHttpServletResponse.getStatus());
 
 	}
 
@@ -44,7 +44,7 @@ public class FiltersTest {
 
 		BasicFilter basicFilter = new BasicFilter();
 		basicFilter.doFilter(mockHttpServletRequest2, mockHttpServletResponse, mockFilterChain);
-		Assert.assertEquals(mockHttpServletResponse.getStatus(), 200);
+		Assert.assertEquals(200,mockHttpServletResponse.getStatus());
 
 	}
 }
