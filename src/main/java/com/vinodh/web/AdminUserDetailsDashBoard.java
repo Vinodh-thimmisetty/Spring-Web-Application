@@ -73,7 +73,8 @@ public class AdminUserDetailsDashBoard {
 	public ResponseEntity<Map<String, Object>> updateUser(@PathVariable("userId") int userId,
 			@RequestBody UserRegistrationForm user) {
 		Map<String, Object> responseBody = new HashMap<>();
-		responseBody.put(STATUS, userRegistrationService.updateUser(user));
+		userRegistrationService.updateUser(user);
+		responseBody.put(STATUS, SUCCESS);
 		return ResponseEntity.ok(responseBody);
 	}
 

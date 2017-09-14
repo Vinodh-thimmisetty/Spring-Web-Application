@@ -18,4 +18,8 @@ public interface UserRegistrationDAO {
 	List<ApplicationUser> loadAllUserDetails();
 
 	int deleteUser(int userId);
+
+	void updateUser(ApplicationUser user);
+
+	ApplicationUser loadUserDetail(int userId);
 }

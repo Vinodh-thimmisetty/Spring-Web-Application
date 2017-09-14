@@ -5,8 +5,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,14 +33,7 @@ import com.vinodh.web.AdminUserDetailsDashBoard;
 
 public class AdminUserDetailsDashBoardTest {
 
-	private static final String VALID_EMAIL = "vinodh5052@gmail.com";
-	private static final String INVALID_EMAIL = "vinodhgmail.com";
-
-	private static final String VALID_USERNAME = "vinodh5052";
-	private static final String INVALID_USERNAME = "invalid";
-
 	private static final String SUCCESS = "SUCCESS";
-	private static final String VALIDATION_ERRORS = "VALIDATION_ERRORS";
 	private final static String STATUS = "STATUS";
 
 	@InjectMocks
@@ -77,6 +72,19 @@ public class AdminUserDetailsDashBoardTest {
 
 	@Test
 	@WithMockUser
+	public void loadAllUsers() throws Exception {
+		Mockito.when(registrationService.loadAllUserDetails()).thenReturn(Collections.emptyList());
+		List<UserRegistrationForm> usersList = jsonMapper
+				.readValue(mockMvc.perform(MockMvcRequestBuilders.get("/admin/listAllUsers"))
+						.andExpect(MockMvcResultMatchers.status().is2xxSuccessful()).andReturn().getResponse()
+						.getContentAsString(), new TypeReference<List<UserRegistrationForm>>() {
+						});
+
+		Assert.assertTrue(CollectionUtils.isEmpty(usersList));
+	}
+
+	@Test
+	@WithMockUser
 	public void loadSingleUser() throws Exception {
 		Mockito.when(registrationService.loadUserDetail(Matchers.anyInt())).thenReturn(sampleDTO());
 
@@ -97,21 +105,25 @@ public class AdminUserDetailsDashBoardTest {
 
 		responseEntity = jsonMapper.readValue(mockMvc
 				.perform(MockMvcRequestBuilders.post("/admin/addNewUser").accept(MediaType.APPLICATION_JSON_UTF8)
-						.contentType(MediaType.APPLICATION_JSON).content(jsonMapper.writeValueAsString(registrationForm)))
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(jsonMapper.writeValueAsString(registrationForm)))
 				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)).andReturn().getResponse()
 				.getContentAsString(), new TypeReference<Map<String, Object>>() {
 				});
 
-		Assert.assertThat("New User is added",responseEntity.get(STATUS),
+		Assert.assertThat("New User is added", responseEntity.get(STATUS),
 				org.hamcrest.Matchers.is(org.hamcrest.Matchers.equalTo(SUCCESS)));
 
-		/*mockMvc.perform(MockMvcRequestBuilders.post("/admin/addNewUser").accept(MediaType.APPLICATION_JSON_UTF8)
-						.contentType(MediaType.APPLICATION_JSON).content(jsonMapper.writeValueAsString(registrationForm)))
-						.andDo(MockMvcResultHandlers.print())
-						.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-						.andExpect(MockMvcResultMatchers.model().errorCount(2));*/
-		
+		/*
+		 * mockMvc.perform(MockMvcRequestBuilders.post("/admin/addNewUser").accept(
+		 * MediaType.APPLICATION_JSON_UTF8)
+		 * .contentType(MediaType.APPLICATION_JSON).content(jsonMapper.
+		 * writeValueAsString(registrationForm))) .andDo(MockMvcResultHandlers.print())
+		 * .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+		 * .andExpect(MockMvcResultMatchers.model().errorCount(2));
+		 */
+
 	}
 
 	@Test
@@ -119,7 +131,7 @@ public class AdminUserDetailsDashBoardTest {
 	public void updateuser() throws UnsupportedEncodingException, Exception {
 		Map<String, Object> responseEntity;
 
-		Mockito.when(registrationService.updateUser(Matchers.any(UserRegistrationForm.class))).thenReturn(1);
+		Mockito.doNothing().when(registrationService).updateUser(Matchers.any(UserRegistrationForm.class));
 
 		responseEntity = jsonMapper.readValue(mockMvc
 				.perform(MockMvcRequestBuilders.put("/admin/143/updateUser").accept(MediaType.APPLICATION_JSON_UTF8)
@@ -129,9 +141,9 @@ public class AdminUserDetailsDashBoardTest {
 				.getContentAsString(), new TypeReference<Map<String, Object>>() {
 				});
 
-		Assert.assertEquals(1, responseEntity.get(STATUS));
+		Assert.assertEquals(SUCCESS, responseEntity.get(STATUS));
 		Assert.assertThat("User Details are updated", responseEntity.get(STATUS),
-				org.hamcrest.Matchers.is(org.hamcrest.Matchers.equalTo(1)));
+				org.hamcrest.Matchers.is(org.hamcrest.Matchers.equalTo(SUCCESS)));
 	}
 
 	@Test

@@ -15,10 +15,13 @@ import javax.mail.MessagingException;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.dozer.DozerBeanMapper;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Matchers;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.vinodh.dao.UserRegistrationDAO;
@@ -102,6 +105,36 @@ public class UserRegistrationServiceTest {
 		doNothing().when(userRegistrationDAO).saveUserDetails(sampleApplicationUser(sampleDTO()));
 		doNothing().when(emailService).sendRegistrationVerificatoinEmail(any(Mail.class), anyString());
 		userRegistrationService.saveUserDetails(sampleDTO());
+	}
+
+	@Test
+	public void loadUserDetails() {
+		Mockito.when(userRegistrationDAO.loadAllUserDetails())
+				.thenReturn(Arrays.asList(sampleApplicationUser(sampleDTO()), sampleApplicationUser(sampleDTO())));
+		Assert.assertTrue(CollectionUtils.isNotEmpty(userRegistrationService.loadAllUserDetails()));
+	}
+
+	@Test
+	public void loadSingleUser() {
+		Mockito.when(userRegistrationDAO.loadUserDetail(Matchers.anyInt()))
+				.thenReturn(sampleApplicationUser(sampleDTO()));
+		Assert.assertThat("Get single user Info", new DozerBeanMapper()
+				.map(userRegistrationService.loadUserDetail(Matchers.anyInt()), ApplicationUser.class).getCountry(),
+				org.hamcrest.Matchers
+						.is(org.hamcrest.Matchers.equalTo(sampleApplicationUser(sampleDTO()).getCountry())));
+	}
+
+	@Test
+	public void updateUser() {
+		Mockito.doNothing().when(userRegistrationDAO).updateUser(any(ApplicationUser.class));
+		userRegistrationService.updateUser(sampleDTO());
+	}
+
+	@Test
+	public void deleteUser() {
+		Mockito.when(userRegistrationDAO.deleteUser(Matchers.anyInt())).thenReturn(1);
+		Assert.assertEquals(1, userRegistrationService.deleteUser(Matchers.anyInt()));
+
 	}
 
 	/**

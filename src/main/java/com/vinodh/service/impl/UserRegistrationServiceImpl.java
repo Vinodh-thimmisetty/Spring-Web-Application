@@ -82,12 +82,12 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	}
 
 	@Override
-	public int updateUser(UserRegistrationForm user) { 
-		return 0;
+	public void updateUser(UserRegistrationForm user) {
+		userRegistrationDAO.updateUser(new DozerBeanMapper().map(user, ApplicationUser.class));
 	}
 
 	@Override
-	public UserRegistrationForm loadUserDetail(int userId) { 
-		return null;
+	public UserRegistrationForm loadUserDetail(int userId) {
+		return new DozerBeanMapper().map(userRegistrationDAO.loadUserDetail(userId), UserRegistrationForm.class);
 	}
 }

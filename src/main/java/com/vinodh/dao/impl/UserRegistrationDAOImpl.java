@@ -82,4 +82,17 @@ public class UserRegistrationDAOImpl implements UserRegistrationDAO {
 		return currentSession.createNamedQuery("delete.user").setParameter("userId", userId).executeUpdate();
 	}
 
+	@Override
+	public void updateUser(ApplicationUser user) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		currentSession.saveOrUpdate(user);
+	}
+
+	@Override
+	public ApplicationUser loadUserDetail(int userId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		return currentSession.get(ApplicationUser.class, userId);
+
+	}
+
 }
