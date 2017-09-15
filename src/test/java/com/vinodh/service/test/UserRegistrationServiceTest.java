@@ -132,8 +132,8 @@ public class UserRegistrationServiceTest {
 
 	@Test
 	public void deleteUser() {
-		Mockito.when(userRegistrationDAO.deleteUser(Matchers.anyInt())).thenReturn(1);
-		Assert.assertEquals(1, userRegistrationService.deleteUser(Matchers.anyInt()));
+		Mockito.when(userRegistrationDAO.deleteUser(Matchers.anyLong())).thenReturn(1);
+		Assert.assertEquals(1, userRegistrationService.deleteUser(Matchers.anyLong()));
 
 	}
 

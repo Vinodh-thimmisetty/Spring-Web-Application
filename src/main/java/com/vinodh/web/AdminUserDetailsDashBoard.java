@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vinodh.dto.UserRegistrationForm;
 import com.vinodh.service.UserRegistrationService;
@@ -70,8 +71,9 @@ public class AdminUserDetailsDashBoard {
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping(value = "{userId}/updateUser")
-	public ResponseEntity<Map<String, Object>> updateUser(@PathVariable("userId") int userId,
+	public @ResponseBody ResponseEntity<Map<String, Object>> updateUser(@PathVariable("userId") Long userId,
 			@RequestBody UserRegistrationForm user) {
+		user.setId(userId);
 		Map<String, Object> responseBody = new HashMap<>();
 		userRegistrationService.updateUser(user);
 		responseBody.put(STATUS, SUCCESS);
@@ -80,7 +82,7 @@ public class AdminUserDetailsDashBoard {
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping(value = "{userId}/deleteUser")
-	public ResponseEntity<Map<String, Object>> deleteUser(@PathVariable("userId") int userId) {
+	public @ResponseBody ResponseEntity<Map<String, Object>> deleteUser(@PathVariable("userId") Long userId) {
 		Map<String, Object> responseBody = new HashMap<>();
 		responseBody.put(STATUS, userRegistrationService.deleteUser(userId));
 		return ResponseEntity.ok(responseBody);

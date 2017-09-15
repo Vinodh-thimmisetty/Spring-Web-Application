@@ -151,7 +151,7 @@ public class AdminUserDetailsDashBoardTest {
 	public void deleteUser() throws Exception {
 		Map<String, Object> responseEntity;
 
-		Mockito.when(registrationService.deleteUser(Matchers.anyInt())).thenReturn(1);
+		Mockito.when(registrationService.deleteUser(Matchers.anyLong())).thenReturn(1);
 
 		responseEntity = jsonMapper.readValue(mockMvc.perform(MockMvcRequestBuilders.delete("/admin/143/deleteUser"))
 				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
