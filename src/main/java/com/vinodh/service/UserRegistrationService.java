@@ -19,7 +19,7 @@ public interface UserRegistrationService extends ApplicationService {
 
 	List<UserRegistrationForm> loadAllUserDetails();
 
-	int deleteUser(int userId);
+	int deleteUser(Long userId);
 
 	void updateUser(UserRegistrationForm user);
 

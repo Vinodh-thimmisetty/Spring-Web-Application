@@ -77,7 +77,7 @@ public class UserRegistrationDAOImpl implements UserRegistrationDAO {
 	}
 
 	@Override
-	public int deleteUser(int userId) {
+	public int deleteUser(Long userId) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		return currentSession.createNamedQuery("delete.user").setParameter("userId", userId).executeUpdate();
 	}

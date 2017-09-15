@@ -17,7 +17,7 @@ public interface UserRegistrationDAO {
 
 	List<ApplicationUser> loadAllUserDetails();
 
-	int deleteUser(int userId);
+	int deleteUser(Long userId);
 
 	void updateUser(ApplicationUser user);
 

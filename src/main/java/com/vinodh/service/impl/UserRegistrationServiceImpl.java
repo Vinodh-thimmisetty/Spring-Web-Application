@@ -77,7 +77,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	}
 
 	@Override
-	public int deleteUser(int userId) {
+	public int deleteUser(Long userId) {
 		return userRegistrationDAO.deleteUser(userId);
 	}
 

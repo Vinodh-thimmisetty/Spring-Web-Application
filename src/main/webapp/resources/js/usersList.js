@@ -8,6 +8,7 @@ var httpGET = "GET";
 var httpPOST = "POST";
 var httpPUT = "PUT";
 var httpDELETE = "DELETE";
+var datatableValues;
 
 
 
@@ -17,7 +18,7 @@ var glyphiconFemale = "<span class='fa fa-female' style='color:green'></span>" ;
 var glyphiconTrans = "<span class='fa fa-transgender'></span>" ;
 
 $(document).ready(function() {
-	$('#listOfRegisteredUsers').DataTable({
+	  datatableValues = $('#listOfRegisteredUsers').DataTable({
 		 "autoWidth": false,
 		"paging" : true, 
 		 "order": [[0,"asc"]],
@@ -59,13 +60,25 @@ $(document).ready(function() {
 	/* Trigger Actions on Update, Delete Links*/
 	
 	$("body").on("click","#listOfRegisteredUsers .updateUser",function(hrefEvent){
+		// Block the HREF action from redirecting.
 		hrefEvent.preventDefault();
 	    console.log($(this).attr("href"));
+	    // Data table ROW. Find the <tr> tag by traversing through Parent.
+	    var userRow = $(hrefEvent.target).parents("tr");
 	    var updateActionURL = $(this).attr("href"); 
+	    $(userRow).find('td').each(function(){
+	    	console.log($(this).html());
+		     
+		}); 
+	    
 	    var updatedUserInformation = {
-	    		
-	    		
+	    	 	"firstName" : $(userRow).find('td')[1].innerHTML,
+	    	 	"lastName" : $(userRow).find('td')[2].innerHTML, 
+	    	 	"userEmail" : $(userRow).find('td')[6].innerHTML,
+	    	 	"phone" : $(userRow).find('td')[9].innerHTML 
 	    };
+	    console.log(updatedUserInformation);
+	    
 	    // PUT ACTION to update the User Information
 	    $.ajax({
 	    		contentType: jsonRequest,
@@ -76,7 +89,7 @@ $(document).ready(function() {
 	    		async: true // Default
 			})
 			.done(function(data, textStatus, jqXHR) { 
-				
+				console.log("User Data is Updated");
 			})
 			.fail(function(jqXHR, textStatus, errorThrown) {
 				 
@@ -86,11 +99,14 @@ $(document).ready(function() {
 	    });
 	
 	$("body").on("click","#listOfRegisteredUsers .deleteUser",function(hrefEvent){
+		// Block the HREF action from redirecting.
 		hrefEvent.preventDefault();
-	    console.log($(this).attr("href"));
+	    console.log($(this).attr("href")); 
+		// Data table ROW. Find the <tr> tag by traversing through Parent.
+		var userRow = $(hrefEvent.target).parents("tr");
 	    var deleteActionURL = $(this).attr("href");  
-	    // DELETE ACTION to remove the User Information
-	    $.ajax({
+	    // DELETE ACTION to remove the User Information 
+		$.ajax({
 	    		contentType: jsonRequest,
 	    		url: deleteActionURL,
 	    		type: httpDELETE, 
@@ -99,6 +115,7 @@ $(document).ready(function() {
 			})
 			.done(function(data, textStatus, jqXHR) { 
 				console.log("deleted");
+				$(userRow).remove();
 			})
 			.fail(function(jqXHR, textStatus, errorThrown) {
 				console.log("error");
