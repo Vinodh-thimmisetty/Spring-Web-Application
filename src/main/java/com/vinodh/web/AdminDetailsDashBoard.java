@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.vinodh.dto.ApplicationUser;
+import com.vinodh.dto.ApplicationAdminDTO;
 
 public class AdminDetailsDashBoard {
 
@@ -26,27 +26,27 @@ public class AdminDetailsDashBoard {
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/loadAdminDetailsPage")
 	public String loadAdminDetailsPage(Model model) {
-		model.addAttribute("adminsList", new ApplicationUser());
+		model.addAttribute("adminsList", new ApplicationAdminDTO());
 		return "/admin/adminList";
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/listAllAdmins")
-	public ResponseEntity<List<ApplicationUser>> listAllCourses() {
-		List<ApplicationUser> admins = Collections.emptyList();
+	public ResponseEntity<List<ApplicationAdminDTO>> listAllCourses() {
+		List<ApplicationAdminDTO> admins = Collections.emptyList();
 		return ResponseEntity.ok(admins);
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/{adminUserId}")
-	public ResponseEntity<ApplicationUser> getAdmin() {
-		ApplicationUser admin = null;
+	public ResponseEntity<ApplicationAdminDTO> getAdmin() {
+		ApplicationAdminDTO admin = null;
 		return ResponseEntity.ok(admin);
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "/addNewAdmin")
-	public ResponseEntity<Map<String, Object>> addNewAdmin(@Valid @RequestBody ApplicationUser applicationUser,
+	public ResponseEntity<Map<String, Object>> addNewAdmin(@Valid @RequestBody ApplicationAdminDTO applicationUser,
 			BindingResult bindingResult) {
 		Map<String, Object> fieldErrors = Collections.emptyMap();
 		if (bindingResult.hasFieldErrors()) {
@@ -61,7 +61,7 @@ public class AdminDetailsDashBoard {
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "{adminUserId}/updateUser")
 	public ResponseEntity<Map<String, Object>> updateAdmin(@PathVariable("adminUserId") int adminUserId,
-			@RequestBody ApplicationUser applicationUser) {
+			@RequestBody ApplicationAdminDTO applicationUser) {
 
 		return null;
 	}
@@ -69,7 +69,7 @@ public class AdminDetailsDashBoard {
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "{adminUserId}/deleteUser")
 	public ResponseEntity<Map<String, Object>> deleteAdmin(@PathVariable("adminUserId") int adminUserId,
-			@RequestBody ApplicationUser applicationUser) {
+			@RequestBody ApplicationAdminDTO applicationUser) {
 
 		return null;
 	}

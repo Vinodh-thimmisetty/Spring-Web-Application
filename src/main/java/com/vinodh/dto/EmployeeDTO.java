@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Employee {
+public class EmployeeDTO {
 
 	@NotNull
 	@Size(min = 5, max = 25)

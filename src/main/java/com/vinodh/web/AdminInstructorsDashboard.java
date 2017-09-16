@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.vinodh.dto.Instructor;
+import com.vinodh.dto.InstructorDTO;
 
 @Controller
 @RequestMapping("/admin")
@@ -30,27 +30,27 @@ public class AdminInstructorsDashboard {
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/loadInstructorDetailsPage")
 	public String loadInstructorDetailsPage(Model model) {
-		model.addAttribute("instructor", new Instructor());
+		model.addAttribute("instructor", new InstructorDTO());
 		return "/admin/instructorsList";
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/listAllInstructors")
-	public ResponseEntity<List<Instructor>> listAllInstructors() {
-		List<Instructor> instructors = Collections.emptyList();
+	public ResponseEntity<List<InstructorDTO>> listAllInstructors() {
+		List<InstructorDTO> instructors = Collections.emptyList();
 		return ResponseEntity.ok(instructors);
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/{instructorId}")
-	public ResponseEntity<Instructor> getInstructor() {
-		Instructor instructor = null;
+	public ResponseEntity<InstructorDTO> getInstructor() {
+		InstructorDTO instructor = null;
 		return ResponseEntity.ok(instructor);
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "/addNewInstructor")
-	public ResponseEntity<Map<String, Object>> addNewInstructor(@Valid @RequestBody Instructor instructor,
+	public ResponseEntity<Map<String, Object>> addNewInstructor(@Valid @RequestBody InstructorDTO instructor,
 			BindingResult bindingResult) {
 		Map<String, Object> fieldErrors = Collections.emptyMap();
 		if (bindingResult.hasFieldErrors()) {
@@ -65,7 +65,7 @@ public class AdminInstructorsDashboard {
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "{instructorId}/updateInstructor")
 	public ResponseEntity<Map<String, Object>> updateInstructor(@PathVariable("instructorId") int instructorId,
-			@RequestBody Instructor instructor) {
+			@RequestBody InstructorDTO instructor) {
 
 		return null;
 	}
@@ -73,7 +73,7 @@ public class AdminInstructorsDashboard {
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "{courseId}/deleteInstructor")
 	public ResponseEntity<Map<String, Object>> deleteInstructor(@PathVariable("instructorId") int instructorId,
-			@RequestBody Instructor instructor) {
+			@RequestBody InstructorDTO instructor) {
 
 		return null;
 	}

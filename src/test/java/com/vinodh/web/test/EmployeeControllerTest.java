@@ -16,7 +16,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.vinodh.dto.Employee;
+import com.vinodh.dto.EmployeeDTO;
 import com.vinodh.web.EmployeeController;
 
 public class EmployeeControllerTest {
@@ -35,7 +35,7 @@ public class EmployeeControllerTest {
 
 	@Test
 	public void loadEmployee() throws Exception {
-		mockMvc.perform(get("/docs/loadEmployees.tsp")).andExpect(model().attribute("employee", any(Employee.class)))
+		mockMvc.perform(get("/docs/loadEmployees.tsp")).andExpect(model().attribute("employee", any(EmployeeDTO.class)))
 				.andExpect(view().name(EMPLOYEE_VIEW_NAME)).andExpect(status().isOk());
 	}
 

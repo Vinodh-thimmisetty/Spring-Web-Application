@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.vinodh.dto.Employee;
+import com.vinodh.dto.EmployeeDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,12 +26,12 @@ public class EmployeeController {
 
 	@GetMapping(value = "/docs/loadEmployees.tsp")
 	public String loadEmployee(final ModelMap modelMap) {
-		modelMap.addAttribute("employee", new Employee());
+		modelMap.addAttribute("employee", new EmployeeDTO());
 		return EMPLOYEE_VIEW_NAME;
 	}
 
 	@PostMapping(value = "/docs/addEmployeeAjax.tsp")
-	public ResponseEntity<Map<String, String>> addEmployeeAjax(@Valid @ModelAttribute Employee employee,
+	public ResponseEntity<Map<String, String>> addEmployeeAjax(@Valid @ModelAttribute EmployeeDTO employee,
 			BindingResult result) {
 		log.info(employee.toString());
 
@@ -45,7 +45,7 @@ public class EmployeeController {
 	}
 
 	@PostMapping(value = "/docs/addEmployee.tsp")
-	public String addEmployee(@Valid @ModelAttribute Employee employee, BindingResult result) {
+	public String addEmployee(@Valid @ModelAttribute EmployeeDTO employee, BindingResult result) {
 		log.info(employee.toString());
 
 		if (result.hasErrors()) {

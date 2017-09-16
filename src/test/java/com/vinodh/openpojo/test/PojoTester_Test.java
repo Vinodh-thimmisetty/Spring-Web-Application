@@ -4,12 +4,13 @@ import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsForAll;
 
 import org.junit.Test;
 
-import com.vinodh.dto.ApplicationUser;
-import com.vinodh.dto.Course;
-import com.vinodh.dto.Employee;
-import com.vinodh.dto.Instructor;
+import com.vinodh.dto.ApplicationAdminDTO;
+import com.vinodh.dto.CourseDTO;
+import com.vinodh.dto.EmployeeDTO;
+import com.vinodh.dto.InstructorDTO;
 import com.vinodh.dto.Mail;
 import com.vinodh.dto.UserRegistrationForm;
+import com.vinodh.entity.ApplicationUser;
 import com.vinodh.entity.Country;
 import com.vinodh.entity.State;
 
@@ -21,17 +22,17 @@ public class PojoTester_Test {
 	PackageFilter packageFilter = new PackageFilter() {
 		@Override
 		public Class<?>[] getClasses() {
-			return new Class[] { UserRegistrationForm.class, Course.class, Employee.class, Instructor.class, Mail.class,
-					ApplicationUser.class };
+			return new Class[] { UserRegistrationForm.class, CourseDTO.class, EmployeeDTO.class, InstructorDTO.class,
+					Mail.class, ApplicationAdminDTO.class };
 		}
 	};
 
 	@Test
 	public void pojoTester() {
-		final Class<?>[] testDTOClass = { UserRegistrationForm.class, Course.class, Employee.class, Instructor.class,
-				Mail.class, ApplicationUser.class };
+		final Class<?>[] testDTOClass = { UserRegistrationForm.class, CourseDTO.class, EmployeeDTO.class,
+				InstructorDTO.class, Mail.class, ApplicationAdminDTO.class };
 
-		final Class<?>[] testEntityClass = { com.vinodh.entity.ApplicationUser.class, Country.class, State.class,
+		final Class<?>[] testEntityClass = { ApplicationUser.class, Country.class, State.class,
 				com.vinodh.entity.Employee.class };
 
 		// assertPojoMethodsForAll(testDTOClass);
@@ -47,8 +48,9 @@ public class PojoTester_Test {
 
 	@Test
 	public void missedCoverageTest() {
-		assertPojoMethodsForAll(Course.class, Instructor.class, ApplicationUser.class, Mail.class,
-				UserRegistrationForm.class).areWellImplemented();
+		assertPojoMethodsForAll(CourseDTO.class, EmployeeDTO.class, InstructorDTO.class, Mail.class,
+				ApplicationAdminDTO.class, UserRegistrationForm.class).areWellImplemented();
+
 	}
 
 }

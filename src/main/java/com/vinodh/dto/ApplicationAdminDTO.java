@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ApplicationUser {
+public class ApplicationAdminDTO {
 	@NotBlank(message = "First name is required.")
 	private String firstName;
 

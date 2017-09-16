@@ -36,9 +36,6 @@
 	src="/Spring-Security/webjars/bootstrapvalidator/js/bootstrapValidator.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="/Spring-Security/webjars/bootstrap/css/bootstrap.css">
-<script type="text/javascript"
-	src="/Spring-Security/webjars/webjars/popper.js/dist/umd/popper.js"></script>
-
 
 <script type="text/javascript"
 	src="/Spring-Security/webjars/tablesorter/js/jquery.tablesorter.js"></script>
@@ -50,31 +47,52 @@
 
 
 <style type="text/css">
-#success_message {
-	display: none;
-}
-
-.errorMessageStyle {
-	color: #a94442;
-	font-size: 85%;
-	display: block;
-	margin-top: 5px;
-	margin-bottom: 10px;
-}
 </style>
 </head>
 <body>
-<body>
-	<div class="container">
-		<br />
-		<button class="btn btn-success" value="Vinodh"></button>
-		<div class="alert alert-success">
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-			<strong>Success!</strong> It is working as we expected.
-		</div>
+	<!-- begin Header -->
+	<div id="header">
+
+		<!-- begin  Navigation bar-->
+		<nav class="navbar navbar-light navbar-fixed-top"
+			style="background-color: #e3f2fd;">
+
+			<!-- Hamburger Menu starts-->
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#adminNavbarToggler" aria-controls="adminNavbarToggler"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<!-- Hamburger Menu ends-->
+
+			<!-- begin nav bar links -->
+			<div class="collapse navbar-collapse" id="adminNavbarToggler">
+
+				<!-- begin Nav bar Brand -->
+				<div class="navbar-header">
+					<a href="#" class="navbar-brand"> <img
+						src="https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg"
+						width="30" height="30" class="d-inline-block align-top" alt="">
+						<b>Course Admin</b>
+					</a>
+				</div>
+				<!-- end Nav bar Brand -->
+
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<li>
+						<form class="form-inline my-2 my-lg-0">
+							<input class="form-control mr-sm-2" type="text"
+								placeholder="Search">
+							<button class="btn btn-outline-success my-2 my-sm-0"
+								type="submit">Search</button>
+						</form>
+					</li>
+				</ul>
+			</div>
+			<!-- end nav bar links -->
+		</nav>
+		<!-- end Navigation bar -->
 	</div>
+	<!-- End Header -->
 </body>
-
-</body>
-
 </html>

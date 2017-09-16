@@ -35,11 +35,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        .and()
 	        	.formLogin().loginPage("/login").permitAll() 
 	        .and()
-	        	.csrf() // Enabled By Default of <form:form> is used
-	        .and()
 	        	.logout().logoutUrl("/logout")
 	        .and()
-	        	.exceptionHandling().accessDeniedPage("/Access_Denied");
+	        	.exceptionHandling().accessDeniedPage("/Access_Denied") 
+		   .and()	// Enabled By Default of <form:form> is used. It will Block the PUT and DELETE actions
+		         .csrf().disable(); 
 	}
 	//@formatter:on
 	/**
