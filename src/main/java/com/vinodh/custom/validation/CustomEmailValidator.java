@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import com.vinodh.util.custom.annotations.ValidEmail;
@@ -23,6 +24,9 @@ public class CustomEmailValidator implements ConstraintValidator<ValidEmail, Str
 
 	@Override
 	public boolean isValid(String email, ConstraintValidatorContext context) {
+		if (StringUtils.isBlank(email)) {
+			return false;
+		}
 		// Java Regexp
 		Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 		Matcher matcher = pattern.matcher(email); 

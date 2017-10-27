@@ -3,6 +3,7 @@ package com.vinodh.custom.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +24,10 @@ public class EmailExistsValidator implements ConstraintValidator<IsEmailExists, 
 	@Override
 	public boolean isValid(String email, ConstraintValidatorContext context) {
 		// Check if Email already exits in Database
+		if (StringUtils.isBlank(email)) {
+			return false;
+		}
+
 		return userRegistrationService.isValidEmail(email);
 
 	}

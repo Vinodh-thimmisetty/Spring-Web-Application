@@ -42,8 +42,8 @@ public class AdminInstructorsDashboard {
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
-	@GetMapping("/{instructorId}")
-	public ResponseEntity<InstructorDTO> getInstructor() {
+	@GetMapping("/instructor/{instructorId}")
+	public ResponseEntity<InstructorDTO> getInstructor(@PathVariable("instructorId") int instructorId) {
 		InstructorDTO instructor = null;
 		return ResponseEntity.ok(instructor);
 	}

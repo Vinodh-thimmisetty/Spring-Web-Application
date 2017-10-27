@@ -8,15 +8,22 @@ import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.vinodh.dto.ApplicationAdminDTO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Controller
+@RequestMapping("/admin")
+@Slf4j
 public class AdminDetailsDashBoard {
 
 	public static final String SUCCESS = "SUCCESS";
@@ -32,21 +39,21 @@ public class AdminDetailsDashBoard {
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/listAllAdmins")
-	public ResponseEntity<List<ApplicationAdminDTO>> listAllCourses() {
+	public ResponseEntity<List<ApplicationAdminDTO>> listAllAdmins() {
 		List<ApplicationAdminDTO> admins = Collections.emptyList();
 		return ResponseEntity.ok(admins);
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/{adminUserId}")
-	public ResponseEntity<ApplicationAdminDTO> getAdmin() {
+	public ResponseEntity<ApplicationAdminDTO> getAdmin(@PathVariable("adminUserId") int courseId) {
 		ApplicationAdminDTO admin = null;
 		return ResponseEntity.ok(admin);
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "/addNewAdmin")
-	public ResponseEntity<Map<String, Object>> addNewAdmin(@Valid @RequestBody ApplicationAdminDTO applicationUser,
+	public ResponseEntity<Map<String, Object>> addNewAdmin(@Valid @RequestBody ApplicationAdminDTO applicationAdmin,
 			BindingResult bindingResult) {
 		Map<String, Object> fieldErrors = Collections.emptyMap();
 		if (bindingResult.hasFieldErrors()) {

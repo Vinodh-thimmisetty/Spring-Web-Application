@@ -52,7 +52,7 @@ public class AdminCourseListDashBoard {
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
-	@GetMapping("/{courseId}")
+	@GetMapping("/course/{courseId}")
 	public ResponseEntity<CourseDTO> getCourse(@PathVariable("courseId") int courseId) {
 		log.info("Get a Course of {}", courseId);
 		CourseDTO course = usercourseService.getCourse(courseId);
