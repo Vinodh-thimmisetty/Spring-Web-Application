@@ -1,9 +1,13 @@
 package com.vinodh.config;
 
+import javax.validation.Validator;
+
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 /**
  * Spring Root Application Context
@@ -23,4 +27,9 @@ import org.springframework.context.annotation.Import;
 		@ComponentScan.Filter(type = FilterType.REGEX, pattern = { "com.vinodh.web.*", "com.vinodh.config.test.*" }) })
 @Import(value = { DatabaseConfig.class, EmailConfig.class })
 public class SpringRootApplicationContext {
+	
+	@Bean
+	public Validator validator() {
+		return new LocalValidatorFactoryBean();
+	}
 }
