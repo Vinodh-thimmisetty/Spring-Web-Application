@@ -7,10 +7,20 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.vinodh.domain.AuthenticationUser;
 import com.vinodh.service.AuthenticationUserDetailsService;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 
+ * Accessible only to SUPER ADMIN who will manage the Application specific
+ * Admins who will monitor the applications.
+ * 
+ * 
+ * @author Vinodh Kumar Thimmisetty
+ *
+ */
 @Controller
 @RequestMapping("/admin")
 @Slf4j
@@ -27,6 +37,7 @@ public class AuthenticationController {
 	@GetMapping(value = "/authHomePage")
 	public String loadAuthenitcationHomepage(ModelMap model) {
 		model.addAttribute("users", userService.listAllAuthUsers());
+		model.addAttribute("authorizedAdmin", new AuthenticationUser());
 		log.info("Authentication Home Page");
 		return "/admin/authhomepage";
 	}

@@ -28,6 +28,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AuthenticationUser implements UserDetails {
 	private static final long serialVersionUID = -5623636169002512248L;
+	
 	private String userId;
 	private String userFirstName;
 	private String userLastName;

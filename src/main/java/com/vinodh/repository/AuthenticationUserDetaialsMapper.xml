@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.vinodh.repository.AuthenticationUserDetailsDAO">
+	<resultMap type="AuthenticationUser" id="authenticationUser">
+		<id column="USER_ID" property="userId" />
+		<result column="USER_FIRST_NAME" property="userFirstName" />
+		<result column="USER_LAST_NAME" property="userLastName" />
+		<result column="USER_EMAIL" property="userEmail" />
+		<result column="USER_PHONE" property="userPhone" />
+		<result column="APPLICATION_NAME" property="applicationName" />
+		<result column="USER_ROLE" property="role" />
+	</resultMap>
+	<select id="listAllAuthUsers" resultType="authenticationUser">
+		SELECT
+		USER_ID,USER_FIRST_NAME,USER_LAST_NAME,USER_EMAIL,USER_PHONE,USER_ROLE,APPLICATION_NAME,LAST_MODIFIED_BY,LAST_MODIFIED_DATE
+		FROM VINODH.AUTHENTICATION_USER_DETAILS
+	</select>
+	<select id="getAuthUser" resultType="authenticationUser">
+		SELECT
+		USER_ID,USER_FIRST_NAME,USER_LAST_NAME,USER_EMAIL,USER_PHONE,USER_ROLE,APPLICATION_NAME,LAST_MODIFIED_BY,LAST_MODIFIED_DATE
+		FROM VINODH.AUTHENTICATION_USER_DETAILS WHERE USER_ID = #{userId}
+	</select>
+	<update id="updateAuthUser">
+		UPDATE VINODH.AUTHENTICATION_USER_DETAILS SET
+		USER_ROLE = #{authenticationUser.userRole}
+		LAST_MODIFIED_BY =
+		#{loggedInUser}
+		WHERE USER_ID = #{userId}
+	</update>
+	<delete id="deleteAuthUser">
+		DELETE FROM VINODH.AUTHENTICATION_USER_DETAILS WHERE
+		USER_ID = #{userId}
+	</delete>
+	<insert id="insertAuthUser" keyProperty="USER_ID">
+		INSERT INTO
+		VINODH.AUTHENTICATION_USER_DETAILS
+		(USER_ID,USER_FIRST_NAME,USER_LAST_NAME,USER_EMAIL,USER_PHONE,USER_ROLE,APPLICATION_NAME,LAST_MODIFIED_BY,LAST_MODIFIED_DATE)
+		VALUES(#{authenticationUser.userId},#{authenticationUser.userFirstName},#{authenticationUser.userLastName},#{authenticationUser.userEmail},#{authenticationUser.userPhone},
+		#{authenticationUser.role},#{authenticationUser.applicationName},#{loggedInUser},SYSDATE);
+	</insert>
+</mapper>		
+		
