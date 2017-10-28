@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.vinodh.domain.AuthenticationUser;
@@ -18,7 +17,7 @@ public class AuthenticationUserDetailsServiceImpl implements AuthenticationUserD
 	AuthenticationUserDetailsDAO authenticationUserDetailsDAO;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username) {
 		return null;
 	}
 

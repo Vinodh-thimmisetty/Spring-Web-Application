@@ -27,9 +27,9 @@ import lombok.extern.slf4j.Slf4j;
 @PreAuthorize(value = "hasRole('ROLE_SUPER_ADMIN')")
 public class AuthenticationController {
 
-	public final static String SUCCESS = "SUCCESS";
-	public final static String VALIDATION_ERROR = "VALIDATION_ERROR";
-	public final static String SERVER_ERROR = "SERVER_ERROR";
+	public static final  String SUCCESS = "SUCCESS";
+	public static final  String VALIDATION_ERROR = "VALIDATION_ERROR";
+	public static final  String SERVER_ERROR = "SERVER_ERROR";
 
 	@Autowired
 	private AuthenticationUserDetailsService userService;

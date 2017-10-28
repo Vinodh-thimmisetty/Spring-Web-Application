@@ -18,6 +18,7 @@ import org.springframework.security.provisioning.UserDetailsManager;
 @EnableGlobalMethodSecurity(prePostEnabled=true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	private static final String ADMIN = "ADMIN";
 	 
 	//@formatter:off 
 	@Override
@@ -62,10 +63,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
 		// Memory Database
 		auth.inMemoryAuthentication().withUser("bill").password("abc123").roles("USER");
-		auth.inMemoryAuthentication().withUser("admin").password("root123").roles("ADMIN");
-		auth.inMemoryAuthentication().withUser("dba").password("root123").roles("ADMIN", "DBA");
+		auth.inMemoryAuthentication().withUser("admin").password("root123").roles(ADMIN);
+		auth.inMemoryAuthentication().withUser("dba").password("root123").roles(ADMIN, "DBA");
 		auth.inMemoryAuthentication().withUser("Vinodh").password("abcd1234").roles("SUPER_ADMIN", "APPLICATION_ADMIN",
-				"APPLICATION_USER", "ADMIN", "USER", "DBA");
+				"APPLICATION_USER", ADMIN, "USER", "DBA");
 
 		// Custom User Database
 	}
