@@ -26,6 +26,7 @@ import org.springframework.web.servlet.view.JstlView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vinodh.config.WebSecurityConfig;
 import com.vinodh.service.AuthenticationUserDetailsService;
+import com.vinodh.service.UserRegistrationService;
 import com.vinodh.util.custom.annotations.WithMockUserInformation;
 import com.vinodh.web.AuthenticationController;
 
@@ -38,6 +39,9 @@ public class AuthUserControllerTest {
 
 	@Mock
 	AuthenticationUserDetailsService authenticationUserDetailsService;
+	
+	@Mock
+	UserRegistrationService userRegistrationService;
 
 	@Autowired
 	FilterChainProxy springSecurityFilterChain;
@@ -70,6 +74,7 @@ public class AuthUserControllerTest {
 	@WithMockUserInformation
 	public void loadUserAuthenticationPage() throws Exception {
 		Mockito.when(authenticationUserDetailsService.listAllAuthUsers()).thenReturn(Collections.emptyList());
+		Mockito.when(userRegistrationService.loadAllUserDetails()).thenReturn(Collections.emptyList());
 		mockMvc.perform(MockMvcRequestBuilders.get("/admin/authHomePage"))
 				.andExpect(MockMvcResultMatchers.model().attributeExists("users"))
 				.andExpect(MockMvcResultMatchers.model().attribute("users", Matchers.is(Matchers.empty())))
