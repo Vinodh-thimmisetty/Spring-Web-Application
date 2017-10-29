@@ -46,7 +46,7 @@ function deleteAdmin(clickEvent) {
 	console.log(deleteActionURL);
 	//
 	$('#deleteAdminConfirmation').show();
-	/*
+	
 	// Ajax to Delete the Record
 	$.ajax({
 		contentType : jsonRequest,
@@ -62,4 +62,4 @@ function deleteAdmin(clickEvent) {
 		console.log("error");
 	});
 
-	 */}
+	 }
