@@ -23,6 +23,7 @@ public class WithMockCustomUserSecurityContextFactory implements WithSecurityCon
 		authorities.add(new SimpleGrantedAuthority("ROLE_APPLICATION_USER"));
 		authorities.add(new SimpleGrantedAuthority("ROLE_APPLICATION_ADMIN"));
 		authorities.add(new SimpleGrantedAuthority("ROLE_SUPER_ADMIN"));
+		authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 		authorities.add(new SimpleGrantedAuthority("ROLE_OTHER"));
 		CustomUserInfo customUserInfo = new CustomUserInfo("Mocked-Vinodh", "aaa", true, true, true, true, authorities);
 		Authentication authentication = new UsernamePasswordAuthenticationToken(customUserInfo,

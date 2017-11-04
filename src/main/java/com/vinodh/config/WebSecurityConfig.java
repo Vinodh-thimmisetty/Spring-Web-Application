@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
@@ -15,19 +16,23 @@ import org.springframework.security.provisioning.UserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled=true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private static final String ADMIN = "ADMIN";
-	 
+
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/resources/**", "/webjars/**");
+	}
+
 	//@formatter:off 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception { 
 		
 		// Ordering has to be from most specific to Least Specific URL Pattern
 		 http
-		 	.authorizeRequests() 
-		 		.antMatchers("/resources/**","/webjars/**").permitAll()
+		 	.authorizeRequests()  
 		 		.antMatchers("/", "/home","/test/**").permitAll() 
 		 		.antMatchers("/admin/authHomePage**").access("hasRole('SUPER_ADMIN')")
 		 		.antMatchers("/admin/**").access("hasRole('ADMIN')")

@@ -38,4 +38,6 @@ public interface AuthenticationUserDetailsService extends UserDetailsService {
 
 	int deleteAuthUser(String userId, String loggedInUser);
 
+	int addAuthUser(AuthenticationUser authenticationUser, String loggedInUserNameFromSpringSecurityContext);
+
 }

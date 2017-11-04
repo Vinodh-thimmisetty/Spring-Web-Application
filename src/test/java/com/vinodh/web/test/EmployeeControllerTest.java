@@ -35,7 +35,8 @@ public class EmployeeControllerTest {
 
 	@Test
 	public void loadEmployee() throws Exception {
-		mockMvc.perform(get("/docs/loadEmployees.tsp")).andExpect(model().attribute("employee", any(EmployeeDTO.class)))
+		mockMvc.perform(get("/docs/loadEmployees.tsp"))
+				.andExpect(model().attribute("employeeDTO", any(EmployeeDTO.class)))
 				.andExpect(view().name(EMPLOYEE_VIEW_NAME)).andExpect(status().isOk());
 	}
 
@@ -43,13 +44,14 @@ public class EmployeeControllerTest {
 	public void addEmployee() throws Exception {
 		mockMvc.perform(post("/docs/addEmployee.tsp").param("empName", "Vinodh")).andExpect(status().isOk())
 				.andExpect(view().name(EMPLOYEE_VIEW_NAME));
-		mockMvc.perform(post("/docs/addEmployee.tsp").param("empName", "Vinodh").param("emailId", "Vinodh@gmail.com")
-				.param("phoneNum", "1234567897").param("weight", "70").param("dateOfBirth", LocalDate.now().toString()))
-				.andExpect(status().isOk()).andExpect(view().name("Done"));
+		mockMvc.perform(post("/docs/addEmployee.tsp").param("empName", "Vinodhkumar")
+				.param("emailId", "Vinodh@gmail.com").param("phoneNum", "1234567897").param("weight", "70")
+				.param("dateOfBirth", LocalDate.now().toString())).andExpect(status().isOk())
+				.andExpect(view().name("Done"));
 
 		mockMvc.perform(post("/docs/addEmployeeAjax.tsp").param("empName", "Vinodh"))
 				.andExpect(status().isBadRequest());
-		mockMvc.perform(post("/docs/addEmployeeAjax.tsp").param("empName", "Vinodh")
+		mockMvc.perform(post("/docs/addEmployeeAjax.tsp").param("empName", "Vinodhkumar")
 				.param("emailId", "Vinodh@gmail.com").param("phoneNum", "1234567897").param("weight", "70")
 				.param("dateOfBirth", LocalDate.now().toString())).andExpect(status().isCreated());
 

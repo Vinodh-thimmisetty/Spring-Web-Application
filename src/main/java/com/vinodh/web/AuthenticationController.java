@@ -12,6 +12,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.vinodh.domain.AuthenticationUser;
@@ -39,6 +41,7 @@ public class AuthenticationController {
 	public static final String VALIDATION_ERROR = "VALIDATION_ERROR";
 	public static final String SERVER_ERROR = "SERVER_ERROR";
 	public static final String STATUS = "STATUS";
+	public static final String EFFECTED_ROWS_COUNT = "COUNT";
 
 	@Autowired
 	private AuthenticationUserDetailsService authenticationUserDetailsService;
@@ -56,11 +59,28 @@ public class AuthenticationController {
 	}
 
 	@DeleteMapping(value = "{userId}/deleteAdmin")
-	public ResponseEntity<Map<String, Object>> deleteCourse(@PathVariable("userId") String userId) {
+	public ResponseEntity<Map<String, Object>> deleteAdmin(@PathVariable("userId") String userId) {
 		log.info("Delete a userId of {}", userId);
 		Map<String, Object> responseBody = new HashMap<>();
-		responseBody.put(STATUS,
+		responseBody.put(EFFECTED_ROWS_COUNT,
 				authenticationUserDetailsService.deleteAuthUser(userId, loggedInUserNameFromSpringSecurityContext()));
+		responseBody.put(STATUS, SUCCESS);
+		return ResponseEntity.ok(responseBody);
+	}
+
+	/**
+	 * Validations will be performed at Service Layer
+	 * 
+	 * @param authenticationUser
+	 * @return
+	 */
+	@PostMapping(value = "/addNewAdmin")
+	public ResponseEntity<Map<String, Object>> addNewAdmin(@RequestBody AuthenticationUser authenticationUser) {
+		log.info("Adding a new User");
+		Map<String, Object> responseBody = new HashMap<>();
+		responseBody.put(EFFECTED_ROWS_COUNT, authenticationUserDetailsService.addAuthUser(authenticationUser,
+				loggedInUserNameFromSpringSecurityContext()));
+		responseBody.put(STATUS, SUCCESS);
 		return ResponseEntity.ok(responseBody);
 	}
 

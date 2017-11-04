@@ -51,4 +51,9 @@ public class AuthenticationUserDetailsServiceImpl implements AuthenticationUserD
 		return authenticationUserDetailsDAO.deleteAuthUser(userId, loggedInUser);
 	}
 
+	@Override
+	public int addAuthUser(AuthenticationUser authenticationUser, String loggedInUser) { 
+		return authenticationUserDetailsDAO.insertAuthUser(authenticationUser, loggedInUser);
+	}
+
 }
