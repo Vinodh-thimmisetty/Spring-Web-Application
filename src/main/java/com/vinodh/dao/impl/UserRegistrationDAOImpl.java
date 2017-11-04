@@ -91,7 +91,7 @@ public class UserRegistrationDAOImpl implements UserRegistrationDAO {
 	@Override
 	public ApplicationUser loadUserDetail(int userId) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		return currentSession.get(ApplicationUser.class, userId);
+		return currentSession.get(ApplicationUser.class, Long.valueOf(userId));
 
 	}
 

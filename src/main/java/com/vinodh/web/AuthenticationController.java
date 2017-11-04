@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vinodh.domain.AuthenticationUser;
+import com.vinodh.domain.AuthenticationUser.Role;
+import com.vinodh.dto.UserRegistrationForm;
 import com.vinodh.service.AuthenticationUserDetailsService;
 import com.vinodh.service.UserRegistrationService;
 
@@ -38,6 +41,7 @@ import lombok.extern.slf4j.Slf4j;
 public class AuthenticationController {
 
 	public static final String SUCCESS = "SUCCESS";
+	public static final String FAILURE = "FAILURE";
 	public static final String VALIDATION_ERROR = "VALIDATION_ERROR";
 	public static final String SERVER_ERROR = "SERVER_ERROR";
 	public static final String STATUS = "STATUS";
@@ -74,7 +78,7 @@ public class AuthenticationController {
 	 * @param authenticationUser
 	 * @return
 	 */
-	@PostMapping(value = "/addNewAdmin")
+	@PostMapping(value = "/addNewAdminOrUser")
 	public ResponseEntity<Map<String, Object>> addNewAdmin(@RequestBody AuthenticationUser authenticationUser) {
 		log.info("Adding a new User");
 		Map<String, Object> responseBody = new HashMap<>();
@@ -82,6 +86,37 @@ public class AuthenticationController {
 				loggedInUserNameFromSpringSecurityContext()));
 		responseBody.put(STATUS, SUCCESS);
 		return ResponseEntity.ok(responseBody);
+	}
+
+	/**
+	 * Validations will be performed at Service Layer
+	 * 
+	 * @param authenticationUser
+	 * @return
+	 */
+	@PostMapping(value = "/addAdminOrUser")
+	public ResponseEntity<Map<String, Object>> addNewAdminOrUser(@RequestParam("userId") String userId,
+			@RequestParam("userRole") Role userRole) {
+		log.info("Adding a new User");
+		Map<String, Object> responseBody = new HashMap<>();
+		UserRegistrationForm userRegistrationForm = userRegistrationService.loadUserDetail(Integer.parseInt(userId));
+		if (userRegistrationForm != null) {
+			AuthenticationUser authenticationUser = AuthenticationUser.builder()
+					.userFirstName(userRegistrationForm.getFirstName()).applicationName("spring-security")
+					.role(userRole).userEmail(userRegistrationForm.getUserEmail())
+					.userLastName(userRegistrationForm.getLastName()).userPhone(userRegistrationForm.getPhone())
+					.userId(userId).build();
+			responseBody.put(EFFECTED_ROWS_COUNT, authenticationUserDetailsService.mergeAuthUser(authenticationUser,
+					loggedInUserNameFromSpringSecurityContext()));
+			responseBody.put(STATUS, SUCCESS);
+			responseBody.put("authenticationUser", authenticationUser);
+			return ResponseEntity.ok(responseBody);
+
+		} else {
+			responseBody.put(STATUS, FAILURE);
+			return ResponseEntity.unprocessableEntity().body(responseBody);
+
+		}
 	}
 
 	/**

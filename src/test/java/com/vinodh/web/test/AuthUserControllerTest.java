@@ -167,7 +167,7 @@ public class AuthUserControllerTest {
 		Mockito.when(authenticationUserDetailsService.addAuthUser(authenticationUser, currentUser)).thenReturn(1);
 
 		Map<String, Object> response = jsonMapper.readValue(mockMvc
-				.perform(MockMvcRequestBuilders.post("/admin/addNewAdmin").accept(MediaType.APPLICATION_JSON)
+				.perform(MockMvcRequestBuilders.post("/admin/addNewAdminOrUser").accept(MediaType.APPLICATION_JSON)
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(jsonMapper.writeValueAsString(authenticationUser)))
 				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())

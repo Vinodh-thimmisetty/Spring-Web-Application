@@ -131,14 +131,15 @@ address {
 		style="margin-top: 20px; margin-bottom: 20px">
 		<h2 style="text-align: left; margin-bottom: 20px; margin-top: -40px">Add/Update
 			Admin Authentication</h2>
-		<form class="form-inline">
+		<form class="form-inline" name="saveNewAdmin">
 			<div class="form-group">
 				<input id="adminName" name="adminName" type="text"
 					class="form-control" placeholder="search for admin.."
-					list="usersList">
+					list="usersList" required="required">
 				<datalist id="usersList">
 					<c:forEach items="${registeredUsers}" var="eachUser">
-						<option value="${eachUser.firstName} ${eachUser.lastName}" />
+						<option label="${eachUser.firstName} ${eachUser.lastName}"
+							value="${eachUser.id}" />
 					</c:forEach>
 				</datalist>
 			</div>
@@ -157,9 +158,13 @@ address {
 				</label>
 			</div>
 			<div class="form-group">
-				<button class="btn btn-danger" type="button" value="Search" disabled>Submit</button>
+				<button id="saveNewAdminOrUser" name="saveNewAdminOrUser"
+					class="btn btn-danger" type="button" value="Search">Submit</button>
 			</div>
 		</form>
+		<p id="invalidUser"
+			style="color: red; text-align: left; display: none;">Please enter
+			a valid User</p>
 	</div>
 
 	<div class="container jumbotron">
@@ -187,7 +192,7 @@ address {
 						<td>${eachUser.userPhone}</td>
 						<td>${eachUser.role}</td>
 						<td>${eachUser.applicationName}</td>
-						<td><button class="btn btn-danger deleteUser"
+						<td><button class="btn btn-danger deleteUser" id="${eachUser.userId}"
 								data-toggle="modal" data-target="#deleteAdminConfirmation"
 								value="${eachUser.userId}" data-userid="${eachUser.userId}"
 								onclick="deleteAdmin(this);">Delete</button></td>

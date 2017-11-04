@@ -34,6 +34,46 @@ $(document).ready(function() {
 		  });
 		});
 	
+
+	$('#saveNewAdminOrUser').click(function(e) { 
+		var formObject = document.forms["saveNewAdmin"];
+		var adminId = $.trim(formObject['adminName'].value);
+		var selectedRole = $.trim(formObject['adminOrUser'].value);
+		console.log(selectedRole, "<< saved !! >>", adminId);
+		var integerRegex = /^\d+$/;
+		if (adminId == null || adminId == '' || adminId == undefined || !integerRegex.test(adminId)) {
+			console.log("......");
+			// Not a valid registered user
+			$('#invalidUser').show();
+			// Stop hitting the server
+			e.preventDefault();
+		}else{
+			// Hide All Error Messages::
+			$('#invalidUser').hide(); 
+			
+			$.ajax({  
+	    		url: '/Spring-Security/admin/addAdminOrUser',
+	 			data :  {
+					userId : adminId,
+					userRole : selectedRole
+				},
+ 	    		type: httpPOST
+			}).done(function(data, textStatus, jqXHR) {
+				// Add user to the Table
+				console.log(data.authenticationUser);
+				console.log(jqXHR.status);
+				var userInfo = {"eachUser":data.authenticationUser} 
+				deleteExistingUserIfExists(adminId);
+				$('#adminsInfoList tbody').append(constructTableRow(userInfo));
+				
+			}).fail(function(jqXHR, textStatus, errorThrown) {
+				// Show Error Message 
+				$('#invalidUser').show();
+
+			});
+		}
+		
+	});
 	 
 });
 
@@ -46,7 +86,7 @@ function deleteAdmin(clickEvent) {
 	console.log(deleteActionURL);
 	//
 	$('#deleteAdminConfirmation').show();
-	
+
 	// Ajax to Delete the Record
 	$.ajax({
 		contentType : jsonRequest,
@@ -62,4 +102,25 @@ function deleteAdmin(clickEvent) {
 		console.log("error");
 	});
 
-	 }
+ 
+}
+
+function constructTableRow(ss) {
+console.log(ss);
+let eachUser = ss.eachUser;
+console.log(eachUser);
+	return "<tr>"
+			+ "<td>"+ eachUser.userFirstName +"</td>"
+			+ "<td>"+eachUser.userEmail+"</td>"
+			+ "<td>"+eachUser.userPhone+"</td>"
+			+ "<td>"+eachUser.role+"</td>"
+			+ "<td>"+eachUser.applicationName+"</td>"
+			+ "<td><button class='btn btn-danger deleteUser' id='"+ eachUser.userId +"' data-toggle='modal' data-target='#deleteAdminConfirmation' value='"+ eachUser.userId +"' data-userid='"+eachUser.userId +"' onclick='deleteAdmin(this);'>Delete</button></td>"
+			+ "</tr>";
+
+}
+
+function deleteExistingUserIfExists(userId) {
+	console.log(userId);
+	$("#" + userId).parents("tr").remove();
+}
