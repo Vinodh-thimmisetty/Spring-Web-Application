@@ -42,6 +42,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<javax.servlet.version>3.1.0</javax.servlet.version>
 		<hibernate.version>5.2.10.Final</hibernate.version>
 		<hsqldb.version>2.4.0</hsqldb.version>
 		<webjar-locator.version>0.32</webjar-locator.version>
@@ -58,6 +59,27 @@
 	</properties>
 
 	<dependencies>
+
+		<!-- https://mvnrepository.com/artifact/org.powermock/powermock-module-junit4 -->
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-junit4</artifactId>
+			<version>1.7.1</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.powermock/powermock-api-mockito -->
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito</artifactId>
+			<version>1.7.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.librepdf</groupId>
+			<artifactId>openpdf</artifactId>
+			<version>1.0.4</version>
+		</dependency>
 
 		<!-- Mybatis -->
 
@@ -251,7 +273,7 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
+			<version>${javax.servlet.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
@@ -313,6 +335,19 @@
 			<version>3.6</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-math3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math3</artifactId>
+			<version>3.6.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>4.1</version>
+		</dependency>
 
 		<!-- Testing -->
 		<dependency>
@@ -367,9 +402,9 @@
 				<configuration>
 					<destFile>${basedir}/target/jacoco.exec</destFile>
 					<dataFile>${basedir}/target/jacoco.exec</dataFile>
-					<excludes>
+					<!-- <excludes>
 						<exclude>**/demo/**/*</exclude>
-					</excludes>
+					</excludes> -->
 				</configuration>
 				<executions>
 					<execution>
