@@ -54,7 +54,7 @@ import lombok.Getter;
 @Data
 @AllArgsConstructor
 @Builder
-@ValidPassengerCount
+//@ValidPassengerCount
 public class Car {
 
 	// Sample Field Level Constraints
