@@ -54,6 +54,7 @@ import lombok.Getter;
 @Data
 @AllArgsConstructor
 @Builder
+@ValidPassengerCount
 public class Car {
 
 	// Sample Field Level Constraints
@@ -120,5 +121,7 @@ public class Car {
 	@Size(min = 2, max = 100)
 	private List<String> friends;
 
+	@Builder.Default
+	private List<Person> passengers= Collections.emptyList();
 	
 }

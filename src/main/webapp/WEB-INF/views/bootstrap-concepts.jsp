@@ -13,7 +13,7 @@
 <!-- Support for IE recent version(Google Query) -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- Title of a Page -->
-<title>Course Registration Dashboard</title>
+<title>Bootstrap Concepts</title>
 <meta name="description"
 	content="This page holds information of different Courses available which can be monitored by ADMIN">
 <!-- To ensure proper rendering and touch zooming on mobile devices -->
@@ -53,25 +53,108 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
 
 <style type="text/css">
-/*small Devices like Phones*/
-@media ( min-width : 576px) {
+html, body, #map_canvas {
+	width: 100%;
+	height: 100%;
+	margin: 0;
 }
-/* Medium Devices like Tablets */
-@media ( min-width : 768px) {
-}
-
-/* Large Device like Desktops*/
-@media ( min-width : 992px) {
-}
-
-/* Extra Large Devices like Large Desktops */
-@media ( min-width :1200px) {
-}
-
 </style>
-
 </head>
 <body>
+	<script type="text/javascript">
+		$(function() {
+
+			// variable definitions
+			var center, mapOptions, map, marker, infowindow;
+
+			// Initial position of the map
+			center = new google.maps.LatLng(17.449783, 78.385645);
+
+			function initialize() {
+				// define map options
+				mapOptions = {
+					zoom : 5,
+					center : center,
+					mapTypeId : google.maps.MapTypeId.ROADMAP
+				};
+
+				// Attach the map to the document
+				map = new google.maps.Map(
+						document.getElementById('map_canvas'), mapOptions);
+
+				// The marker details
+				marker = new google.maps.Marker({
+					position : new google.maps.LatLng(17.449783, 78.385645),
+					map : map,
+					title : 'marker7'
+				});
+
+				// define infowindow options
+				infowindow = new google.maps.InfoWindow(
+						{
+							maxWidth : 450,
+							disableAutoPan : false,
+							content : '<div><a class="dialog" href="https://maps.google.com/" target="_blank"></a></div>',
+						});
+
+				// define the marker click functions
+				google.maps.event
+						.addListener(
+								marker,
+								'click',
+								function() {
+									infowindow.open(map, marker);
+									google.maps.event
+											.addListener(
+													infowindow,
+													'domready',
+													function() {
+														$(".dialog")
+																.html(
+																		'<img id="theImg" src="https://goo.gl/phmzis" />');
+													});
+								});
+			}
+
+			google.maps.event.addDomListener(window, 'load', initialize);
+
+			// Bar Chart
+			//bar
+			var ctxB = document.getElementById("barChart").getContext('2d');
+			var myBarChart = new Chart(ctxB, {
+				type : 'bar',
+				data : {
+					labels : [ "Submitted", "Accepted", "Declined", "Closed" ],
+					datasets : [ {
+						label : '# of Votes',
+						data : [ 12, 19, 3, 5 ],
+						backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+								'rgba(54, 162, 235, 0.2)',
+								'rgba(255, 206, 86, 0.2)',
+								'rgba(75, 192, 192, 0.2)',
+								'rgba(153, 102, 255, 0.2)',
+								'rgba(255, 159, 64, 0.2)' ],
+						borderColor : [ 'rgba(255,99,132,1)',
+								'rgba(54, 162, 235, 1)',
+								'rgba(255, 206, 86, 1)',
+								'rgba(75, 192, 192, 1)',
+								'rgba(153, 102, 255, 1)',
+								'rgba(255, 159, 64, 1)' ],
+						borderWidth : 1
+					} ]
+				},
+				options : {
+					scales : {
+						yAxes : [ {
+							ticks : {
+								beginAtZero : true
+							}
+						} ]
+					}
+				}
+			});
+		});
+	</script>
 
 	<!-- begin Header -->
 	<div id="header">
@@ -117,13 +200,15 @@
 		<!-- end Navigation bar -->
 	</div>
 	<!-- End Header -->
-	
-	<!-- Main Body Content starts -->
-	  <section>
-	  
-	  </section> 
-	<!-- Main Body Content ends -->
+	<div class="container">
+		<canvas id="barChart"></canvas>
+	</div>
 
+	<div class="container-fluid" id="map_canvas"></div>
+
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDK828-2olYQSRxablCGSi-IM3BbWJHcsI&callback"
+		type="text/javascript"></script>
 
 </body>
 </html>

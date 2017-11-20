@@ -1,7 +1,7 @@
-$(document).ready(function() { 
+/*$(document).ready(function() { 
     
 	// Auto Suggest the State Names if INDIA is selected in Country dropdown
-	/*$("#listOfCountries").change(function() {
+	$("#listOfCountries").change(function() {
 	    if($(this).find("option:selected").text() == "INDIA"){
 
 	  	  $( "#stateName" ).autocomplete({
@@ -178,13 +178,14 @@ $(document).ready(function() {
 			 
 		
 		}, 'json');
-	}); */
+	});
 });
-
+ */
 //If Javascript is Disabled --> Change the contact form id to contact_form2 and test it
 
 //
 $(document).ready(function() { 
+	
     
 	// Auto Suggest the State Names if INDIA is selected in Country dropdown
 	$("#listOfCountries").change(function() {
@@ -202,7 +203,7 @@ $(document).ready(function() {
 		$('#contact_form2').data('bootstrapValidator').resetForm();
 	})
 	 
-	$('#contact_form2').bootstrapValidator({
+	$('#contdact_form2').bootstrapValidator({
 	// To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
 	feedbackIcons : {
 		valid : 'glyphicon glyphicon-ok',
@@ -319,5 +320,25 @@ $(document).ready(function() {
 		}, "slow") 
  
 	}); 
+	
+
+	// Load anything which has higher probability of breaking a page at end of the page
+	 /* function initMap() {
+
+	        var location = new google.maps.LatLng(50.0875726, 14.4189987);
+
+	        var mapCanvas = document.getElementById('map');
+	        var mapOptions = {
+	            center: location,
+	            zoom: 16,
+	            panControl: false,
+	            mapTypeId: google.maps.MapTypeId.ROADMAP
+	        }
+	        var map = new google.maps.Map(mapCanvas, mapOptions);
+
+	    }
+
+	    google.maps.event.addDomListener(window, 'load', initMap);*/
+	    
 });
 //

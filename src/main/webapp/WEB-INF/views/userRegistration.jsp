@@ -25,6 +25,11 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<!-- <script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDK828-2olYQSRxablCGSi-IM3BbWJHcsI&callback"
+	type="text/javascript"></script> -->
+
 <style type="text/css">
 #success_message {
 	display: none;
@@ -39,7 +44,7 @@
 }
 </style>
 
-<script src="<c:url value="/resources/js/userRegistration.js" />"></script>
+<script src="<c:url value="/resources/js/userRegistration.js" />"></script> 
 <!-- include BlockUI -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.js"></script>
@@ -62,16 +67,12 @@
 		<!-- UnComment above form tag and Comment below to Manually Validate the Server side bean validation -->
 		<form:form class="well form-horizontal"
 			action="${pageContext.request.contextPath}/user/registration2"
-			method="post" id="contact_form2" commandName="userRegistrationForm">
+			method="post" id="contact_form2a" commandName="userRegistrationForm">
 			<fieldset>
 
 				<!-- Form Name -->
-				<legend>
-					<center>
-						<h2>
-							<b>Course Registration Form</b>
-						</h2>
-					</center>
+				<legend style="text-align: center;">  
+							<b>Course Registration Form</b> 
 				</legend>
 				<br>
 
@@ -99,7 +100,7 @@
 								class="glyphicon glyphicon-user"></i></span> <input name="lastName"
 								placeholder="Last Name" class="form-control" type="text">
 						</div>
-						<form:errors path="lastName" cssClass="errorMessageStyle"/>
+						<form:errors path="lastName" cssClass="errorMessageStyle" />
 					</div>
 				</div>
 
